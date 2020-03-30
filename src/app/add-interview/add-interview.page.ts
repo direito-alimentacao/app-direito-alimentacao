@@ -33,13 +33,13 @@ export class AddInterviewPage implements OnInit {
       familyPhoneNumber: [''],
       familyNIS: [''],
       familyIncome: ['', [Validators.required]],
-      familyMembers: [''],
-      riskGroup: [''],
-      children0To2: [''],
-      children2To5: [''],
-      pregnant: [''],
-      disabledPeople: [''],
-      oldPeople: ['']
+      familyMembers: ['0'],
+      riskGroup: ['false'],
+      children0To2: ['false'],
+      children2To5: ['false'],
+      pregnant: ['false'],
+      disabledPeople: ['false'],
+      oldPeople: ['false']
     });
   }
 
