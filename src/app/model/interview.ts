@@ -5,9 +5,17 @@ export enum STATUS {
 
 export class Interview {
 
-    constructor() {
-        this.status = STATUS.TO_SEND;
-        this.createdAt = new Date();
+    constructor(value: any, isNew: boolean) {
+        Object.assign(this, value);
+
+        if (isNew) {
+            this.status = STATUS.TO_SEND;
+            this.createdAt = new Date();
+        }
+    }
+
+    public hasSent(): boolean {
+        return this.status == STATUS.SENT;
     }
 
     status: STATUS;
@@ -18,13 +26,13 @@ export class Interview {
     familyAddress: string;
     familyPhoneNumber: string;
     familyNIS: string;
-    familyIncome: number;    
+    familyIncome: number;
     familyMembers: number;
-    
+
     riskGroup: boolean;
     children0To2: boolean;
     children2To5: boolean;
     pregnant: boolean;
     disabledPeople: boolean;
-    oldPeople: boolean;        
+    oldPeople: boolean;
 }

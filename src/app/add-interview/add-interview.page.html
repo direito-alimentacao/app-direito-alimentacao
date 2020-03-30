@@ -61,7 +61,7 @@
 
         <ion-item>
           <ion-label position="floating">Telefone</ion-label>
-          <ion-input type="tel" formControlName="familyPhoneNumber"></ion-input>
+          <ion-input type="number" formControlName="familyPhoneNumber"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -88,22 +88,28 @@
         </ion-item>
 
         <ion-item>
-          <ion-label>Membros familiares</ion-label>
-          <ion-select value="0" okText="OK" cancelText="Cancelar" formControlName="familyMembers">
-            <ion-select-option value="0">0</ion-select-option>
-            <ion-select-option value="1">1</ion-select-option>
-            <ion-select-option value="2">2</ion-select-option>
-            <ion-select-option value="3">3</ion-select-option>
-            <ion-select-option value="4">4</ion-select-option>
-            <ion-select-option value="5">5</ion-select-option>
-            <ion-select-option value="6">6</ion-select-option>
-            <ion-select-option value="7">7</ion-select-option>
-            <ion-select-option value="8">8</ion-select-option>
-            <ion-select-option value="9">9</ion-select-option>
-            <ion-select-option value="10">10</ion-select-option>
+          <ion-label>Membros familiares *</ion-label>
+          <ion-select okText="OK" cancelText="Cancelar" formControlName="familyMembers">
+            <ion-select-option value="">-</ion-select-option>
+            <ion-select-option>0</ion-select-option>
+            <ion-select-option>1</ion-select-option>
+            <ion-select-option>2</ion-select-option>
+            <ion-select-option>3</ion-select-option>
+            <ion-select-option>4</ion-select-option>
+            <ion-select-option>5</ion-select-option>
+            <ion-select-option>6</ion-select-option>
+            <ion-select-option>7</ion-select-option>
+            <ion-select-option>8</ion-select-option>
+            <ion-select-option>9</ion-select-option>
+            <ion-select-option>10</ion-select-option>
           </ion-select>
         </ion-item>
-
+        <ion-item
+          *ngIf="form.controls.familyMembers.invalid && (form.controls.familyMembers.dirty || form.controls.familyMembers.touched)">
+          <ion-text color="danger" *ngIf="form.controls.familyMembers.errors.required">
+            <br /><small>Favor informar o número de membros da família.</small>
+          </ion-text>
+        </ion-item>
         <ion-item>
           <ion-checkbox slot="start" formControlName="riskGroup"></ion-checkbox>
           <ion-label>Grupo de risco</ion-label>

@@ -15,6 +15,7 @@ export class AddInterviewPage implements OnInit {
 
   agentName: string;
   form: FormGroup;
+  interviews: Interview[];
 
   isFormValid() {
     return this.form ? this.form.valid : false;
@@ -22,40 +23,44 @@ export class AddInterviewPage implements OnInit {
 
   constructor(private storage: Storage, private formBuilder: FormBuilder,
     private alertController: AlertController, private router: Router) {
-    
   }
 
-  private createForm(agentName: string) {
+  async ngOnInit() {
+    this.interviews = [];
+    this.storage.get(storage_constants.INTERVIEWS_STORAGE_KEY).then((val) => {
+      const items: any[] = val ? val : [];
+      items.forEach(element => {
+        this.interviews.push(new Interview(element, false));
+      });
+      this.createForm();
+    });
+  }
+
+  private createForm() {
     this.form = this.formBuilder.group({
-      agentName: [agentName, [Validators.required]],
+      agentName: ['', [Validators.required]],
       familyLeader: ['', [Validators.required]],
       familyAddress: ['', [Validators.required]],
       familyPhoneNumber: [''],
       familyNIS: [''],
       familyIncome: ['', [Validators.required]],
-      familyMembers: ['0'],
-      riskGroup: ['false'],
-      children0To2: ['false'],
-      children2To5: ['false'],
-      pregnant: ['false'],
-      disabledPeople: ['false'],
-      oldPeople: ['false']
+      familyMembers: ['', [Validators.required]],
+      riskGroup: [false],
+      children0To2: [false],
+      children2To5: [false],
+      pregnant: [false],
+      disabledPeople: [false],
+      oldPeople: [false]
     });
   }
 
-  ngOnInit() {
-    this.storage.get(storage_constants.AGENT_NAME_STORAGE_KEY).then((val) => {
-      const agentName: string = val as string;
-      this.createForm(agentName);
-    });
-  }
 
-  public save() {
+  save() {
     if (this.form.valid) {
-      const interview: Interview = Object.assign({}, this.form.value);
-      console.log(interview);
-      this.storage.set(storage_constants.AGENT_NAME_STORAGE_KEY, interview.agentName);
-      this.router.navigate(['/home']);
+      this.interviews.push(new Interview(this.form.value, true));
+      this.storage.set(storage_constants.INTERVIEWS_STORAGE_KEY, this.interviews).then(() => {
+        this.router.navigate(['/home']);
+      });
     }
   }
 
