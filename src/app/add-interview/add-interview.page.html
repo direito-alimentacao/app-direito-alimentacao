@@ -1,0 +1,139 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>
+      Nova entrevista
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="presentAlertConfirm()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button fill="solid" color="secondary" (click)="save()" disabled={{!isFormValid()}}>
+        Salvar
+        <ion-icon slot="end" name="save"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form *ngIf="form" [formGroup]="form">
+    <ion-list>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>
+            Identificação
+          </ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label position="floating">Nome do técnico *</ion-label>
+          <ion-input type="text" formControlName="agentName"></ion-input>
+          <div
+            *ngIf="form.controls.agentName.invalid && (form.controls.agentName.dirty || form.controls.agentName.touched)">
+            <ion-text color="danger" *ngIf="form.controls.agentName.errors.required">
+              <small>Favor informar o nome do técnico.</small>
+            </ion-text>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Chefe da família *</ion-label>
+          <ion-input type="text" formControlName="familyLeader"></ion-input>
+          <div
+            *ngIf="form.controls.familyLeader.invalid && (form.controls.familyLeader.dirty || form.controls.familyLeader.touched)">
+            <ion-text color="danger" *ngIf="form.controls.familyLeader.errors.required">
+              <small>Favor informar o nome do chefe da família.</small>
+            </ion-text>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Endereço *</ion-label>
+          <ion-textarea type="text" rows="2" formControlName="familyAddress"></ion-textarea>
+          <div
+            *ngIf="form.controls.familyAddress.invalid && (form.controls.familyAddress.dirty || form.controls.familyAddress.touched)">
+            <ion-text color="danger" *ngIf="form.controls.familyAddress.errors.required">
+              <small>Favor informar o endereço da família.</small>
+            </ion-text>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Telefone</ion-label>
+          <ion-input type="tel" formControlName="familyPhoneNumber"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">NIS</ion-label>
+          <ion-input type="number" formControlName="familyNIS"></ion-input>
+        </ion-item>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>
+            Pesquisa
+          </ion-label>
+        </ion-item-divider>
+
+        <ion-item>
+          <ion-label position="floating">Renda familiar (R$) *</ion-label>
+          <ion-input type="number" formControlName="familyIncome"></ion-input>
+          <div
+            *ngIf="form.controls.familyIncome.invalid && (form.controls.familyIncome.dirty || form.controls.familyIncome.touched)">
+            <ion-text color="danger" *ngIf="form.controls.familyIncome.errors.required">
+              <small>Favor informar a renda familiar.</small>
+            </ion-text>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Membros familiares</ion-label>
+          <ion-select value="0" okText="OK" cancelText="Cancelar" formControlName="familyMembers">
+            <ion-select-option value="0">0</ion-select-option>
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+            <ion-select-option value="5">5</ion-select-option>
+            <ion-select-option value="6">6</ion-select-option>
+            <ion-select-option value="7">7</ion-select-option>
+            <ion-select-option value="8">8</ion-select-option>
+            <ion-select-option value="9">9</ion-select-option>
+            <ion-select-option value="10">10</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="riskGroup"></ion-checkbox>
+          <ion-label>Grupo de risco</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="children0To2"></ion-checkbox>
+          <ion-label>Crianças de 0 a 2 anos</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="children2To5"></ion-checkbox>
+          <ion-label>Crianças de 2 a 5 anos</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="pregnant"></ion-checkbox>
+          <ion-label>Gestantes</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="disabledPeople"></ion-checkbox>
+          <ion-label>Deficientes</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="oldPeople"></ion-checkbox>
+          <ion-label>Idosos</ion-label>
+        </ion-item>
+      </ion-item-group>
+    </ion-list>
+  </form>
+</ion-content>
