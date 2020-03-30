@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: 'add',
     loadChildren: () => import('./add-interview/add-interview.module').then( m => m.AddInterviewPageModule)
-  },
+  }
 ];
 
 @NgModule({

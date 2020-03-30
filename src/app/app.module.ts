@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomePageModule } from './home/home.module';
 
 @NgModule({
   declarations: [AppComponent],

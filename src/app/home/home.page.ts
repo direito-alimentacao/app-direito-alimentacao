@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Interview, STATUS } from '../model/interview';
 import { Storage } from '@ionic/storage';
 import { storage_constants } from '../constants';
+import { ModalInterviewComponent } from '../modal-interview/modal-interview.component';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,9 @@ export class HomePage {
 
   interviews: Interview[];
 
-  constructor(private storage: Storage, private actionSheetController: ActionSheetController) {
+  constructor(private storage: Storage,
+    private actionSheetController: ActionSheetController,
+    private modalController: ModalController) {
   }
 
   ionViewDidEnter() {
@@ -38,7 +41,7 @@ export class HomePage {
           text: 'Visualizar',
           icon: 'eye-outline',
           handler: () => {
-            console.log('Favorite clicked');
+            this.presentModal(interview);
           }
         },
         {
@@ -49,7 +52,7 @@ export class HomePage {
             this.storage.set(storage_constants.INTERVIEWS_STORAGE_KEY, this.interviews).then(() => {
               this.updateInterviewsList();
             })
-            
+
             console.log('Play clicked');
           }
         },
@@ -70,5 +73,15 @@ export class HomePage {
         }]
     });
     await actionSheet.present();
+  }
+
+  async presentModal(interview: Interview) {
+    const modal = await this.modalController.create({
+      component: ModalInterviewComponent,
+      componentProps: {
+        'interview': interview
+      }
+    });
+    return await modal.present();
   }
 }

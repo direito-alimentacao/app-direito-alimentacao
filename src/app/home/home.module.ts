@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { ModalInterviewComponent } from '../modal-interview/modal-interview.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,8 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, ModalInterviewComponent],
+  entryComponents: [ModalInterviewComponent]
+
 })
 export class HomePageModule {}

@@ -29,7 +29,6 @@ export class Interview {
     familyIncome: number;
     familyMembers: number;
 
-    riskGroup: boolean;
     children0To2: boolean;
     children2To5: boolean;
     pregnant: boolean;
