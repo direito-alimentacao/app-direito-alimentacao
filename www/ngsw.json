@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1585669334918,
+  "timestamp": 1585690331604,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -20,8 +20,8 @@
         "/6-es5.815d7d137fc08c828fb5.js",
         "/7-es2015.f53da072ebda922350a7.js",
         "/7-es5.f53da072ebda922350a7.js",
-        "/92-es2015.93d5290d3feac3c0e4eb.js",
-        "/92-es5.93d5290d3feac3c0e4eb.js",
+        "/92-es2015.26b0b6281510da5fa44f.js",
+        "/92-es5.26b0b6281510da5fa44f.js",
         "/93-es2015.e9abd84127ebd7635c3b.js",
         "/93-es5.e9abd84127ebd7635c3b.js",
         "/94-es2015.f93ce5513f0b3e39f940.js",
@@ -34,8 +34,8 @@
         "/manifest.webmanifest",
         "/polyfills-es2015.c1f142d23713235da53a.js",
         "/polyfills-es5.3f81798dab399e8c607f.js",
-        "/runtime-es2015.713e5e9ab2023f457c95.js",
-        "/runtime-es5.713e5e9ab2023f457c95.js",
+        "/runtime-es2015.9ee85f0939ad38a3fea2.js",
+        "/runtime-es5.9ee85f0939ad38a3fea2.js",
         "/stencil-ion-action-sheet-ios-entry-js-es2015.8a8a593f8486c2d30d00.js",
         "/stencil-ion-action-sheet-ios-entry-js-es5.8a8a593f8486c2d30d00.js",
         "/stencil-ion-action-sheet-md-entry-js-es2015.2698a9c5259ee2341e83.js",
@@ -196,7 +196,7 @@
         "/stencil-polyfills-css-shim-es5.42ba52b7927e934d1afe.js",
         "/stencil-polyfills-dom-es2015.86b2a2ce1a37e48a57fe.js",
         "/stencil-polyfills-dom-es5.86b2a2ce1a37e48a57fe.js",
-        "/styles.8331d93cd58ce84e0252.css"
+        "/styles.fdc9896a832b54b9e4ea.css"
       ],
       "patterns": []
     },
@@ -233,8 +233,8 @@
     "/6-es5.815d7d137fc08c828fb5.js": "bebbe3b58ba5d5c756ee208f736f9b2082e74652",
     "/7-es2015.f53da072ebda922350a7.js": "0d9ea1344aa2468fccfcdbf1da47fc369a0e7b31",
     "/7-es5.f53da072ebda922350a7.js": "0d9ea1344aa2468fccfcdbf1da47fc369a0e7b31",
-    "/92-es2015.93d5290d3feac3c0e4eb.js": "30e593aefaaaee7017a4b693c43014e1ddd6d44a",
-    "/92-es5.93d5290d3feac3c0e4eb.js": "344208abefcb0e7073a9271caa0a1915fce2918b",
+    "/92-es2015.26b0b6281510da5fa44f.js": "1e17c1239b8a03611e5fd33f27937568811ffd49",
+    "/92-es5.26b0b6281510da5fa44f.js": "c2b548fc63a79c6ad4ad08574afc3a500d60ef81",
     "/93-es2015.e9abd84127ebd7635c3b.js": "507a4dc07bb2707575a1ee23fac9f04f1ab083ba",
     "/93-es5.e9abd84127ebd7635c3b.js": "f445f16bc930d5dccd7c5c78083bdbfb04368bad",
     "/94-es2015.f93ce5513f0b3e39f940.js": "0557eeae64147e20f0850f896ec2b1a8f6c5e505",
@@ -251,14 +251,14 @@
     "/assets/shapes.svg": "5413e95adabcb2cb639970051f55e0ddb64ace53",
     "/common-es2015.36dba9b4a718fa165e98.js": "7158c50e3d9db178fbb3eeb8cf68ae1644ac318b",
     "/common-es5.36dba9b4a718fa165e98.js": "fdd8f374f07a1f5c97b7275baccd7cfbdaa2af2a",
-    "/index.html": "6642a3e1cd2d8e0cb25a78f786af243c21c77df8",
+    "/index.html": "d51bcad2a810535dac0a4c877102248f8efb3a23",
     "/main-es2015.5a7c40b7ab202adeedbe.js": "e0be3e48f59eebe54a0f9717e11711bca4be88a4",
     "/main-es5.5a7c40b7ab202adeedbe.js": "ac5764d93e40e2cabcc078b89e2c6994352e598d",
     "/manifest.webmanifest": "0d80d341c3e3efbe9da2bd55bc5639a498b57b10",
     "/polyfills-es2015.c1f142d23713235da53a.js": "d09f5d54be882e501e006c5c097486eef3dbb188",
     "/polyfills-es5.3f81798dab399e8c607f.js": "af404837a6ad1932d594467825a065c901c1446d",
-    "/runtime-es2015.713e5e9ab2023f457c95.js": "a8989256f7eb999e7238243b6f1e28d81a18ec10",
-    "/runtime-es5.713e5e9ab2023f457c95.js": "7f084e20a9f30cef04542378f4d5e467e0c0f586",
+    "/runtime-es2015.9ee85f0939ad38a3fea2.js": "db3ab7bc0a92977d029f138458e42a4e429fec5e",
+    "/runtime-es5.9ee85f0939ad38a3fea2.js": "7148ebed8237dc473c9456502fcf68f623e23dd0",
     "/stencil-ion-action-sheet-ios-entry-js-es2015.8a8a593f8486c2d30d00.js": "ffa6f405770d6268f17e6463d65c117f868dfc35",
     "/stencil-ion-action-sheet-ios-entry-js-es5.8a8a593f8486c2d30d00.js": "99ba96d66694fa7c4bf02f7995eff3fd03b8b146",
     "/stencil-ion-action-sheet-md-entry-js-es2015.2698a9c5259ee2341e83.js": "90de12d0e410a3c47166b6d7141df424684212d4",
@@ -419,7 +419,7 @@
     "/stencil-polyfills-css-shim-es5.42ba52b7927e934d1afe.js": "1036aa6051dd044dcadb2a9a301441225874bebf",
     "/stencil-polyfills-dom-es2015.86b2a2ce1a37e48a57fe.js": "5aeb53c28ef10d89840242c0e89ae55dd60e6568",
     "/stencil-polyfills-dom-es5.86b2a2ce1a37e48a57fe.js": "5aeb53c28ef10d89840242c0e89ae55dd60e6568",
-    "/styles.8331d93cd58ce84e0252.css": "e00daf4d826a159d63a05c20c6962c3c3c42f176"
+    "/styles.fdc9896a832b54b9e4ea.css": "308d2344d5b6f8d8b30ddce89884d81de41f54d3"
   },
   "navigationUrls": [
     {
