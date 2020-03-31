@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { storage_constants } from '../constants';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Interview } from '../model/interview';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-add-interview',
@@ -16,6 +17,16 @@ export class AddInterviewPage implements OnInit {
   agentName: string;
   form: FormGroup;
   interviews: Interview[];
+
+  getContent() {
+    return document.querySelector('ion-content');
+  }
+
+  segmentChanged(ev: any) {
+    console.log(ev.detail.value);
+    let y = document.getElementById(ev.detail.value).offsetTop;
+    this.getContent().scrollToPoint(0, y, 500);
+  }
 
   isFormValid() {
     return this.form ? this.form.valid : false;
@@ -40,6 +51,7 @@ export class AddInterviewPage implements OnInit {
     this.form = this.formBuilder.group({
       agentName: ['', [Validators.required]],
       familyLeader: ['', [Validators.required]],
+      familyDocument: ['', [Validators.required]],
       familyAddress: ['', [Validators.required]],
       familyPhoneNumber: [''],
       familyNIS: [''],
