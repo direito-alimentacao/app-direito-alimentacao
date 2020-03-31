@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1585690331604,
+  "timestamp": 1585696585869,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -196,7 +196,7 @@
         "/stencil-polyfills-css-shim-es5.42ba52b7927e934d1afe.js",
         "/stencil-polyfills-dom-es2015.86b2a2ce1a37e48a57fe.js",
         "/stencil-polyfills-dom-es5.86b2a2ce1a37e48a57fe.js",
-        "/styles.fdc9896a832b54b9e4ea.css"
+        "/styles.e8c4cd588a4a8d060e62.css"
       ],
       "patterns": []
     },
@@ -205,6 +205,8 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "urls": [
+        "/OpenSans-Regular.3ed9575dcc488c3e3a5b.ttf",
+        "/assets/fonts/OpenSans-Regular.ttf",
         "/assets/icon/favicon.png",
         "/assets/icons/icon-128x128.png",
         "/assets/icons/icon-144x144.png",
@@ -239,6 +241,8 @@
     "/93-es5.e9abd84127ebd7635c3b.js": "f445f16bc930d5dccd7c5c78083bdbfb04368bad",
     "/94-es2015.f93ce5513f0b3e39f940.js": "0557eeae64147e20f0850f896ec2b1a8f6c5e505",
     "/94-es5.f93ce5513f0b3e39f940.js": "d12e53644a02c5e6d6e3b37c5707ed84ca637a2d",
+    "/OpenSans-Regular.3ed9575dcc488c3e3a5b.ttf": "babe8dce93a3e48b6c3c79720a0c048e88dd1fe7",
+    "/assets/fonts/OpenSans-Regular.ttf": "babe8dce93a3e48b6c3c79720a0c048e88dd1fe7",
     "/assets/icon/favicon.png": "7798b8e0eb61d7375c245af78bbf5c916932bf13",
     "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
@@ -251,7 +255,7 @@
     "/assets/shapes.svg": "5413e95adabcb2cb639970051f55e0ddb64ace53",
     "/common-es2015.36dba9b4a718fa165e98.js": "7158c50e3d9db178fbb3eeb8cf68ae1644ac318b",
     "/common-es5.36dba9b4a718fa165e98.js": "fdd8f374f07a1f5c97b7275baccd7cfbdaa2af2a",
-    "/index.html": "d51bcad2a810535dac0a4c877102248f8efb3a23",
+    "/index.html": "458b4d9877e8fdc3112b69597bfb25c3f8f48f00",
     "/main-es2015.5a7c40b7ab202adeedbe.js": "e0be3e48f59eebe54a0f9717e11711bca4be88a4",
     "/main-es5.5a7c40b7ab202adeedbe.js": "ac5764d93e40e2cabcc078b89e2c6994352e598d",
     "/manifest.webmanifest": "0d80d341c3e3efbe9da2bd55bc5639a498b57b10",
@@ -419,7 +423,7 @@
     "/stencil-polyfills-css-shim-es5.42ba52b7927e934d1afe.js": "1036aa6051dd044dcadb2a9a301441225874bebf",
     "/stencil-polyfills-dom-es2015.86b2a2ce1a37e48a57fe.js": "5aeb53c28ef10d89840242c0e89ae55dd60e6568",
     "/stencil-polyfills-dom-es5.86b2a2ce1a37e48a57fe.js": "5aeb53c28ef10d89840242c0e89ae55dd60e6568",
-    "/styles.fdc9896a832b54b9e4ea.css": "308d2344d5b6f8d8b30ddce89884d81de41f54d3"
+    "/styles.e8c4cd588a4a8d060e62.css": "d01da27f0bc340f510debc410acf6a01d60630e3"
   },
   "navigationUrls": [
     {
