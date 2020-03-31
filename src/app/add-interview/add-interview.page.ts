@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { storage_constants } from '../constants';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonContent } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Interview } from '../model/interview';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
@@ -17,23 +17,13 @@ export class AddInterviewPage implements OnInit {
   agentName: string;
   form: FormGroup;
   interviews: Interview[];
+  numberOptions: number[];
 
-  getContent() {
-    return document.querySelector('ion-content');
-  }
-
-  segmentChanged(ev: any) {
-    console.log(ev.detail.value);
-    let y = document.getElementById(ev.detail.value).offsetTop;
-    this.getContent().scrollToPoint(0, y, 500);
-  }
-
-  isFormValid() {
-    return this.form ? this.form.valid : false;
-  }
+  @ViewChild('iContent', { static: false }) cont: IonContent;
 
   constructor(private storage: Storage, private formBuilder: FormBuilder,
     private alertController: AlertController, private router: Router) {
+      this.numberOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];      
   }
 
   async ngOnInit() {
@@ -47,6 +37,15 @@ export class AddInterviewPage implements OnInit {
     });
   }
 
+  segmentChanged(ev: any) {
+    let y = document.getElementById(ev.detail.value).offsetTop;
+    this.cont.scrollToPoint(0, y, 500);
+  }
+
+  isFormValid() {
+    return this.form ? this.form.valid : false;
+  }
+
   private createForm() {
     this.form = this.formBuilder.group({
       agentName: ['', [Validators.required]],
@@ -57,12 +56,16 @@ export class AddInterviewPage implements OnInit {
       familyNIS: [''],
       familyIncome: ['', [Validators.required]],
       familyMembers: ['', [Validators.required]],
-      riskGroup: [false],
-      children0To2: [false],
-      children2To5: [false],
-      pregnant: [false],
-      disabledPeople: [false],
-      oldPeople: [false]
+      children0To2: ['', [Validators.required]],
+      children2To5: ['', [Validators.required]],
+      pregnant: ['', [Validators.required]],
+      disabledPeople: ['', [Validators.required]],
+      oldPeople: ['', [Validators.required]],
+      assistanceBPC: [false],
+      assistanceBF: [false],
+      assistanceDeath: [false],
+      assistanceFood: [false],
+      assistanceOthers: ['']
     });
   }
 
