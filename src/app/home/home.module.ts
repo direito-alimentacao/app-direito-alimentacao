@@ -7,6 +7,11 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import { ModalInterviewComponent } from '../modal-interview/modal-interview.component';
 import { YesNoPipe } from '../yes-no.pipe';
+import localePtBr from '@angular/common/locales/pt';
+
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePtBr);
 
 @NgModule({
   imports: [
