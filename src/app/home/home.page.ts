@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController, AlertController } from '@ionic/angular';
 import { Interview, STATUS } from '../model/interview';
 import { Storage } from '@ionic/storage';
 import { storage_constants } from '../constants';
@@ -16,7 +16,8 @@ export class HomePage {
 
   constructor(private storage: Storage,
     private actionSheetController: ActionSheetController,
-    private modalController: ModalController) {
+    private modalController: ModalController,
+    private alertController: AlertController) {
   }
 
   ionViewDidEnter() {
@@ -52,8 +53,6 @@ export class HomePage {
             this.storage.set(storage_constants.INTERVIEWS_STORAGE_KEY, this.interviews).then(() => {
               this.updateInterviewsList();
             })
-
-            console.log('Play clicked');
           }
         },
         {
@@ -61,18 +60,38 @@ export class HomePage {
           role: 'destructive',
           icon: 'trash',
           handler: () => {
-            console.log('Delete clicked');
+            this.presentAlertConfirm(interview);
           }
         }, {
           text: 'Cancelar',
           icon: 'close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
+          role: 'cancel'
         }]
     });
     await actionSheet.present();
+  }
+
+  async presentAlertConfirm(interview: Interview) {
+    const alert = await this.alertController.create({
+      header: 'Atenção!',
+      message: 'Você deseja sair <strong>remover</strong> esta entrevista?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel'
+        }, {
+          text: 'Sim',
+          handler: () => {
+            this.interviews = this.interviews.filter(item => item.createdAt != interview.createdAt);
+            this.storage.set(storage_constants.INTERVIEWS_STORAGE_KEY, this.interviews).then(() => {
+              // pesquisa removida com sucesso!
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async presentModal(interview: Interview) {
