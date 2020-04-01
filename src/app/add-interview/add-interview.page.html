@@ -237,7 +237,7 @@
         </ion-item-divider>
 
         <ion-item>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="fsg1q1"></ion-checkbox>
           <ion-label class="ion-text-wrap">
             Os moradores do seu domicílio tiveram a preocupação de
             que a comida acabasse antes que tivessem dinheiro para comprar mais comida?
@@ -245,7 +245,7 @@
         </ion-item>
 
         <ion-item>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="fsg1q2"></ion-checkbox>
           <ion-label class="ion-text-wrap">
             Os alimentos acabaram antes que os moradores desse domicílio tivessem dinheiro para
             comprar mais comida?
@@ -253,7 +253,7 @@
         </ion-item>
 
         <ion-item>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="fsg1q3"></ion-checkbox>
           <ion-label class="ion-text-wrap">
             Os moradores desse domicílio ficaram sem dinheiro para ter uma alimentação saudável e
             variada?
@@ -261,15 +261,49 @@
         </ion-item>
 
         <ion-item>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" formControlName="fsg1q4"></ion-checkbox>
           <ion-label class="ion-text-wrap">
             Os moradores deste domicílio comeram apenas alguns poucos tipos de alimentos que ainda
             tinham, porque o dinheiro acabou?
           </ion-label>
         </ion-item>
-
-
       </ion-item-group>
+
+      <!-- Second group of feed safety questions -->
+      <ion-item-group *ngIf="showFeedSafetyGroup2()">
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="fsg2q1"></ion-checkbox>
+          <ion-label class="ion-text-wrap">
+            Algum morador de 18 anos ou mais de idade deixou de fazer alguma refeição porque não havia dinheiro para
+            comprar a comida?
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="fsg2q2"></ion-checkbox>
+          <ion-label class="ion-text-wrap">
+            Algum morador de 18 anos ou mais de idade comeu menos do que achou que devia, porque não havia dinheiro para
+            comprar comida?
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="fsg2q3"></ion-checkbox>
+          <ion-label class="ion-text-wrap">
+            Algum morador de 18 anos ou mais de idade sentiu fome, mas não comeu, porque não tinha dinheiro para comprar
+            comida?
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="fsg2q4"></ion-checkbox>
+          <ion-label class="ion-text-wrap">
+            Algum morador de 18 anos ou mais de idade ficou um dia inteiro sem comer ou, teve apenas uma refeição ao
+            dia, porque não tinha dinheiro para comprar a comida?
+          </ion-label>
+        </ion-item>
+      </ion-item-group>
+
+
     </ion-list>
   </form>
 </ion-content>

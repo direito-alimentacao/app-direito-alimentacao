@@ -65,8 +65,23 @@ export class AddInterviewPage implements OnInit {
       assistanceBF: [false],
       assistanceDeath: [false],
       assistanceFood: [false],
-      assistanceOthers: ['']
+      assistanceOthers: [''],
+      fsg1q1: [false],
+      fsg1q2: [false],
+      fsg1q3: [false],
+      fsg1q4: [false],
+      fsg2q1: [false],
+      fsg2q2: [false],
+      fsg2q3: [false],
+      fsg2q4: [false],
     });
+  }
+
+  showFeedSafetyGroup2(): boolean {
+    return (this.form.value.fsg1q1 ||
+      this.form.value.fsg1q2 ||
+      this.form.value.fsg1q3 ||
+      this.form.value.fsg1q4);
   }
 
 
