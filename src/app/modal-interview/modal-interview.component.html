@@ -12,105 +12,311 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item-group>
-      <ion-item-divider>
-        <ion-label>
-          Identificação
-        </ion-label>
-      </ion-item-divider>
-      <ion-item>
-        <ion-label>
-          <h2>Nome do técnico</h2>
-          <p>{{interview.agentName}}</p>
-        </ion-label>
-      </ion-item>
+<ion-segment slot="fixed" color="secondary" (ionChange)="segmentChanged($event)" value="identification">
+  <ion-segment-button value="identification">
+    <ion-icon name="person-circle-outline"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="riskGroup">
+    <ion-icon name="pulse-outline"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="assistance">
+    <ion-icon name="people-outline"></ion-icon>
+  </ion-segment-button>
+  <ion-segment-button value="feedSafety">
+    <ion-icon name="nutrition-outline"></ion-icon>
+  </ion-segment-button>
+</ion-segment>
 
-      <ion-item>
-        <ion-label>
-          <h2>Chefe da família</h2>
-          <p>{{interview.familyLeader}}</p>
-        </ion-label>
-      </ion-item>
+<ion-content #iContent>
+  <ion-list lines="none">
+    <ion-item-divider id="identification">
+      <ion-label>
+        Identificação
+      </ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <h2>Nome do técnico</h2>
+        <p>{{interview.agentName}}</p>
+      </ion-label>
+    </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <h2>Endereço</h2>
-          <p>{{interview.familyAddress}}</p>
-        </ion-label>
-      </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Chefe da família</h2>
+        <p>{{interview.familyLeader}}</p>
+      </ion-label>
+    </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <h2>Telefone</h2>
-          <p>{{interview.familyPhoneNumber}}</p>
-        </ion-label>
-      </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Endereço</h2>
+        <p>{{interview.familyAddress}}</p>
+      </ion-label>
+    </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <h2>NIS</h2>
-          <p>{{interview.familyNIS}}</p>
-        </ion-label>
-      </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Telefone</h2>
+        <p>{{interview.familyPhoneNumber}}</p>
+      </ion-label>
+    </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <h2>Renda familiar (R$)</h2>
-          <p>{{interview.familyIncome}}</p>
-        </ion-label>
-      </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>NIS</h2>
+        <p>{{interview.familyNIS}}</p>
+      </ion-label>
+    </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <h2>Membros familiares</h2>
-          <p>{{interview.familyMembers}}</p>
-        </ion-label>
-      </ion-item>
-    </ion-item-group>
-    <ion-item-group>
-      <ion-item-divider>
-        <ion-label>
-          Grupos de risco
-        </ion-label>
-      </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        <h2>Renda familiar (R$)</h2>
+        <p>{{interview.familyIncome}}</p>
+      </ion-label>
+    </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <h2>Crianças de 0 a 2 anos</h2>
-          <p>{{interview.children0To2}}</p>
-        </ion-label>
-      </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Membros familiares</h2>
+        <p>{{interview.familyMembers}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider id="riskGroup">
+      <ion-label>
+        Grupos de risco
+      </ion-label>
+    </ion-item-divider>
 
-      <ion-item>
-        <ion-label>
-          <h2>Crianças de 2 a 5 anos</h2>
-          <p>{{interview.children2To5}}</p>
-        </ion-label>
-      </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Membros familiares de 0 a 2 anos</h2>
+        <p>{{interview.members0To2}}</p>
+      </ion-label>
+    </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <h2>Gestantes</h2>
-          <p>{{interview.pregnant}}</p>
-        </ion-label>
-      </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Membros familiares de 2 a 5 anos</h2>
+        <p>{{interview.members2To5}}</p>
+      </ion-label>
+    </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <h2>Deficientes</h2>
-          <p>{{interview.disabledPeople}}</p>
-        </ion-label>
-      </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Membros familiares de 5 a 18 anos</h2>
+        <p>{{interview.members5To18}}</p>
+      </ion-label>
+    </ion-item>
 
-      <ion-item>
-        <ion-label>
-          <h2>Idosos</h2>
-          <p>{{interview.oldPeople}}</p>
-        </ion-label>
-      </ion-item>
-    </ion-item-group>
+    <ion-item>
+      <ion-label>
+        <h2>Gestantes</h2>
+        <p>{{interview.pregnant}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Deficientes</h2>
+        <p>{{interview.disabledPeople}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Idosos</h2>
+        <p>{{interview.oldPeople}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-divider id="assistance">
+      <ion-label>
+        Programa e projetos de assistência
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label>
+        <h2>BPC</h2>
+        <p>{{interview.assistanceBPC | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Bolsa família</h2>
+        <p>{{interview.assistanceBF | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Pensão por morte</h2>
+        <p>{{interview.assistanceDeath | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Pensão alimentícia</h2>
+        <p>{{interview.assistanceFood | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h2>Outros</h2>
+        <p>{{interview.assistanceOthers}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item-divider id="feedSafety">
+      <ion-label>
+        Segurança alimentar (nos últimos 3 meses)
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Os moradores do seu domicílio tiveram a preocupação de
+          que a comida acabasse antes que tivessem dinheiro para comprar mais comida?
+        </h2>
+        <p>{{interview.fsg1q1 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Os alimentos acabaram antes que os moradores desse domicílio tivessem dinheiro para
+          comprar mais comida?
+        </h2>
+        <p>{{interview.fsg1q2 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Os moradores desse domicílio ficaram sem dinheiro para ter uma alimentação saudável e
+          variada?
+        </h2>
+        <p>{{interview.fsg1q3 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Os moradores deste domicílio comeram apenas alguns poucos tipos de alimentos que ainda
+          tinham, porque o dinheiro acabou?
+        </h2>
+        <p>{{interview.fsg1q4 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Algum morador de 18 anos ou mais de idade deixou de fazer alguma refeição porque não havia dinheiro para
+          comprar a comida?
+        </h2>
+        <p>{{interview.fsg2q1 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Algum morador de 18 anos ou mais de idade comeu menos do que achou que devia, porque não havia dinheiro para
+          comprar comida?
+        </h2>
+        <p>{{interview.fsg2q2 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Algum morador de 18 anos ou mais de idade sentiu fome, mas não comeu, porque não tinha dinheiro para comprar
+          comida?
+        </h2>
+        <p>{{interview.fsg2q3 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Algum morador de 18 anos ou mais de idade ficou um dia inteiro sem comer ou, teve apenas uma refeição ao
+          dia, porque não tinha dinheiro para comprar a comida?
+        </h2>
+        <p>{{interview.fsg2q4 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Os moradores com menos de 18 anos de idade não puderam ter uma alimentação saudável e variada, porque não
+          havia dinheiro para comparar comida?
+        </h2>
+        <p>{{interview.fsg3q1 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Os moradores menores de 18 anos de idade comeram apenas alguns poucos tipos de alimentos que ainda havia
+          neste domicílio, porque o dinheiro acabou?
+        </h2>
+        <p>{{interview.fsg3q2 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Algum morador com menos de 18 anos de idade comeu menos do que você achou que devia, porque não havia
+          dinheiro para comprar a comida?
+        </h2>
+        <p>{{interview.fsg3q3 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Foi diminuída a quantidade de alimentos das refeições de algum morador com menos de 18 anos de idade, porque
+          não havia dinheiro suficiente para comprar a comida?
+        </h2>
+        <p>{{interview.fsg3q4 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Algum morador com menos de 18 anos de idade deixou de fazer alguma refeição, porque não havia dinheiro para
+          comprar a comida?
+        </h2>
+        <p>{{interview.fsg3q5 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="ion-text-wrap">
+        <h2>
+          Algum morador com menos de 18 anos de idade sentiu fome, mas não comeu porque não havia dinheiro para
+          comprar mais comida?
+        </h2>
+        <p>{{interview.fsg3q6 | yesNo}}</p>
+      </ion-label>
+    </ion-item>
+
 
   </ion-list>
 </ion-content>

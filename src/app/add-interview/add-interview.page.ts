@@ -23,7 +23,7 @@ export class AddInterviewPage implements OnInit {
 
   constructor(private storage: Storage, private formBuilder: FormBuilder,
     private alertController: AlertController, private router: Router) {
-      this.numberOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];      
+    this.numberOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   }
 
   async ngOnInit() {
@@ -50,14 +50,15 @@ export class AddInterviewPage implements OnInit {
     this.form = this.formBuilder.group({
       agentName: ['', [Validators.required]],
       familyLeader: ['', [Validators.required]],
-      familyDocument: ['', [Validators.required]],
+      familyLeaderDocument: ['', [Validators.required]],
       familyAddress: ['', [Validators.required]],
       familyPhoneNumber: [''],
       familyNIS: [''],
       familyIncome: ['', [Validators.required]],
       familyMembers: ['', [Validators.required]],
-      children0To2: ['', [Validators.required]],
-      children2To5: ['', [Validators.required]],
+      members0To2: ['', [Validators.required]],
+      members2To5: ['', [Validators.required]],
+      members5To18: ['', [Validators.required]],
       pregnant: ['', [Validators.required]],
       disabledPeople: ['', [Validators.required]],
       oldPeople: ['', [Validators.required]],
@@ -74,6 +75,12 @@ export class AddInterviewPage implements OnInit {
       fsg2q2: [false],
       fsg2q3: [false],
       fsg2q4: [false],
+      fsg3q1: [false],
+      fsg3q2: [false],
+      fsg3q3: [false],
+      fsg3q4: [false],
+      fsg3q5: [false],
+      fsg3q6: [false],
     });
   }
 
@@ -84,6 +91,12 @@ export class AddInterviewPage implements OnInit {
       this.form.value.fsg1q4);
   }
 
+  showFeedSafetyGroup3(): boolean {
+    return (this.showFeedSafetyGroup2() &&
+      (this.form.value.members0To2 > 0 ||
+        this.form.value.members2To5 > 0 ||
+        this.form.value.members5To18 > 0));
+  }
 
   save() {
     if (this.form.valid) {

@@ -16,7 +16,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<!-- Segment with anchors -->
+
 <ion-segment slot="fixed" color="secondary" (ionChange)="segmentChanged($event)" value="identification">
   <ion-segment-button value="identification">
     <ion-icon name="person-circle-outline"></ion-icon>
@@ -68,10 +68,10 @@
 
         <ion-item>
           <ion-label position="floating">CPF *</ion-label>
-          <ion-input type="number" formControlName="familyDocument"></ion-input>
+          <ion-input type="number" formControlName="familyLeaderDocument"></ion-input>
           <div
-            *ngIf="form.controls.familyDocument.invalid && (form.controls.familyDocument.dirty || form.controls.familyDocument.touched)">
-            <ion-text color="danger" *ngIf="form.controls.familyDocument.errors.required">
+            *ngIf="form.controls.familyLeaderDocument.invalid && (form.controls.familyLeaderDocument.dirty || form.controls.familyLeaderDocument.touched)">
+            <ion-text color="danger" *ngIf="form.controls.familyLeaderDocument.errors.required">
               <small>Favor informar o CPF do chefe da família.</small>
             </ion-text>
           </div>
@@ -130,30 +130,44 @@
         </ion-item-divider>
 
         <ion-item>
-          <ion-label>Crianças de 0 a 2 anos *</ion-label>
-          <ion-select okText="OK" cancelText="Cancelar" formControlName="children0To2">
+          <ion-label>Membros familiares (0-2 anos) *</ion-label>
+          <ion-select okText="OK" cancelText="Cancelar" formControlName="members0To2">
             <ion-select-option value="">-</ion-select-option>
             <ion-select-option *ngFor="let n of numberOptions">{{n}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item
-          *ngIf="form.controls.children0To2.invalid && (form.controls.children0To2.dirty || form.controls.children0To2.touched)">
-          <ion-text color="danger" *ngIf="form.controls.children0To2.errors.required">
-            <br /><small>Favor informar o número de crianças de 0 a 2 anos.</small>
+          *ngIf="form.controls.members0To2.invalid && (form.controls.members0To2.dirty || form.controls.members0To2.touched)">
+          <ion-text color="danger" *ngIf="form.controls.members0To2.errors.required">
+            <br /><small>Favor informar o número de membros familiares de 0 a 2 anos.</small>
           </ion-text>
         </ion-item>
 
         <ion-item>
-          <ion-label>Crianças de 2 a 5 anos *</ion-label>
-          <ion-select okText="OK" cancelText="Cancelar" formControlName="children2To5">
+          <ion-label>Membros familiares (2-5 anos) *</ion-label>
+          <ion-select okText="OK" cancelText="Cancelar" formControlName="members2To5">
             <ion-select-option value="">-</ion-select-option>
             <ion-select-option *ngFor="let n of numberOptions">{{n}}</ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item
-          *ngIf="form.controls.children2To5.invalid && (form.controls.children2To5.dirty || form.controls.children2To5.touched)">
-          <ion-text color="danger" *ngIf="form.controls.children2To5.errors.required">
-            <br /><small>Favor informar o número de crianças de 2 a 5 anos.</small>
+          *ngIf="form.controls.members2To5.invalid && (form.controls.members2To5.dirty || form.controls.members2To5.touched)">
+          <ion-text color="danger" *ngIf="form.controls.members2To5.errors.required">
+            <br /><small>Favor informar o número de membros familiares de 2 a 5 anos.</small>
+          </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Membros familiares (5-18 anos) *</ion-label>
+          <ion-select okText="OK" cancelText="Cancelar" formControlName="members5To18">
+            <ion-select-option value="">-</ion-select-option>
+            <ion-select-option *ngFor="let n of numberOptions">{{n}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item
+          *ngIf="form.controls.members5To18.invalid && (form.controls.members5To18.dirty || form.controls.members5To18.touched)">
+          <ion-text color="danger" *ngIf="form.controls.members5To18.errors.required">
+            <br /><small>Favor informar o número de membros familiares de 5 a 18 anos.</small>
           </ion-text>
         </ion-item>
 
@@ -303,7 +317,56 @@
         </ion-item>
       </ion-item-group>
 
+      <!-- Third group of feed safety questions -->
+      <ion-item-group *ngIf="showFeedSafetyGroup3()">
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="fsg3q1"></ion-checkbox>
+          <ion-label class="ion-text-wrap">
+            Os moradores com menos de 18 anos de idade não puderam ter uma alimentação saudável e variada, porque não
+            havia dinheiro para comparar comida?
+          </ion-label>
+        </ion-item>
 
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="fsg3q2"></ion-checkbox>
+          <ion-label class="ion-text-wrap">
+            Os moradores menores de 18 anos de idade comeram apenas alguns poucos tipos de alimentos que ainda havia
+            neste domicílio, porque o dinheiro acabou?
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="fsg3q3"></ion-checkbox>
+          <ion-label class="ion-text-wrap">
+            Algum morador com menos de 18 anos de idade comeu menos do que você achou que devia, porque não havia
+            dinheiro para comprar a comida?
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="fsg3q4"></ion-checkbox>
+          <ion-label class="ion-text-wrap">
+            Foi diminuída a quantidade de alimentos das refeições de algum morador com menos de 18 anos de idade, porque
+            não havia dinheiro suficiente para comprar a comida?
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="fsg3q5"></ion-checkbox>
+          <ion-label class="ion-text-wrap">
+            Algum morador com menos de 18 anos de idade deixou de fazer alguma refeição, porque não havia dinheiro para
+            comprar a comida?
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-checkbox slot="start" formControlName="fsg3q6"></ion-checkbox>
+          <ion-label class="ion-text-wrap">
+            Algum morador com menos de 18 anos de idade sentiu fome, mas não comeu porque não havia dinheiro para
+            comprar mais comida?
+          </ion-label>
+        </ion-item>
+      </ion-item-group>
     </ion-list>
   </form>
 </ion-content>
