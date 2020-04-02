@@ -44,18 +44,7 @@
             Identificação
           </ion-label>
         </ion-item-divider>
-        <ion-item>
-          <ion-label position="floating">Nome do técnico *</ion-label>
-          <ion-input type="text" formControlName="agentName"></ion-input>
-          <div
-            *ngIf="form.controls.agentName.invalid && (form.controls.agentName.dirty || form.controls.agentName.touched)">
-            <ion-text color="danger" *ngIf="form.controls.agentName.errors.required">
-              <small>Favor informar o nome do técnico.</small>
-            </ion-text>
-          </div>
-        </ion-item>
-
-        <ion-item>
+         <ion-item>
           <ion-label position="floating">Chefe da família *</ion-label>
           <ion-input type="text" formControlName="familyLeader"></ion-input>
           <div
@@ -68,7 +57,7 @@
 
         <ion-item>
           <ion-label position="floating">CPF *</ion-label>
-          <ion-input type="number" formControlName="familyLeaderDocument"></ion-input>
+          <ion-input type="text" maxlength="14" mask="000.000.000-00" [dropSpecialCharacters]="false"  formControlName="familyLeaderDocument"></ion-input>
           <div
             *ngIf="form.controls.familyLeaderDocument.invalid && (form.controls.familyLeaderDocument.dirty || form.controls.familyLeaderDocument.touched)">
             <ion-text color="danger" *ngIf="form.controls.familyLeaderDocument.errors.required">
@@ -89,8 +78,13 @@
         </ion-item>
 
         <ion-item>
-          <ion-label position="floating">Telefone</ion-label>
-          <ion-input type="number" formControlName="familyPhoneNumber"></ion-input>
+          <ion-label position="floating">Telefone fixo</ion-label>
+          <ion-input type="text" maxlength="15" mask="(00) 0000-0000" [dropSpecialCharacters]="false" formControlName="familyPhoneNumber"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Telefone celular</ion-label>
+          <ion-input type="text" maxlength="16" mask="(00) 0 0000-0000" [dropSpecialCharacters]="false" formControlName="familyCelphoneNumber"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -100,7 +94,7 @@
 
         <ion-item>
           <ion-label position="floating">Renda familiar (R$) *</ion-label>
-          <ion-input type="number" formControlName="familyIncome"></ion-input>
+          <ion-input type="text" (ionChange)="formatCurrency($event)" formControlName="familyIncome" ></ion-input>
           <div
             *ngIf="form.controls.familyIncome.invalid && (form.controls.familyIncome.dirty || form.controls.familyIncome.touched)">
             <ion-text color="danger" *ngIf="form.controls.familyIncome.errors.required">

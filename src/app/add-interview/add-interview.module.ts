@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddInterviewPageRoutingModule } from './add-interview-routing.module';
 
 import { AddInterviewPage } from './add-interview.page';
+import { NgxMaskIonicModule } from 'ngx-mask-ionic';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { AddInterviewPage } from './add-interview.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    NgxMaskIonicModule,
     AddInterviewPageRoutingModule
   ],
   declarations: [AddInterviewPage]

@@ -27,6 +27,7 @@ export class Interview {
     familyLeaderDocument: string;
     familyAddress: string;
     familyPhoneNumber: string;
+    familyCelphoneNumber: string;
     familyNIS: string;
     familyIncome: number;
     familyMembers: number;

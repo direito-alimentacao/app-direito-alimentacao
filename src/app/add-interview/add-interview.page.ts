@@ -46,13 +46,24 @@ export class AddInterviewPage implements OnInit {
     return this.form ? this.form.valid : false;
   }
 
+  formatCurrency($event) {
+    var aux = $event.target.value;
+    aux = aux.replace(/\./g, "");
+    aux = aux.replace(/\s/g, "");
+    aux = aux.replace(/\R/g, "");
+    aux = aux.replace(/\$/g, "");
+    aux = aux.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+    if (aux.length > 1) aux = aux.replace(/^0+/, ''); /* Replace leading zeros */
+    $event.target.value = "R$ " + aux;
+}
+
   private createForm() {
     this.form = this.formBuilder.group({
-      agentName: ['', [Validators.required]],
       familyLeader: ['', [Validators.required]],
       familyLeaderDocument: ['', [Validators.required]],
       familyAddress: ['', [Validators.required]],
       familyPhoneNumber: [''],
+      familyCelphoneNumber: [''],
       familyNIS: [''],
       familyIncome: ['', [Validators.required]],
       familyMembers: ['', [Validators.required]],
