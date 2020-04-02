@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, ModalController, AlertController } from '@ionic/angular';
+import { ActionSheetController, ModalController, AlertController, ToastController } from '@ionic/angular';
 import { Interview, STATUS } from '../model/interview';
-import { Storage } from '@ionic/storage';
-import { storage_constants } from '../constants';
 import { ModalInterviewComponent } from '../modal-interview/modal-interview.component';
+import { RepositoryService } from '../services/repository.service';
+import { ModalSaveComponent } from '../modal-save/modal-save.component';
 
 @Component({
   selector: 'app-home',
@@ -14,24 +14,20 @@ export class HomePage {
 
   interviews: Interview[];
 
-  constructor(private storage: Storage,
-    private actionSheetController: ActionSheetController,
+  constructor(private actionSheetController: ActionSheetController,
     private modalController: ModalController,
-    private alertController: AlertController) {
+    private alertController: AlertController,
+    private toastController: ToastController,
+    private repo: RepositoryService) {
+
   }
 
   ionViewDidEnter() {
     this.updateInterviewsList();
   }
 
-  private updateInterviewsList() {
-    this.interviews = [];
-    this.storage.get(storage_constants.INTERVIEWS_STORAGE_KEY).then((val) => {
-      const items: any[] = val ? val : [];
-      items.forEach(element => {
-        this.interviews.push(new Interview(element, false));
-      });
-    });
+  private async updateInterviewsList() {
+    this.interviews = await this.repo.getInterviews();
   }
 
   async presentActionSheet(interview: Interview) {
@@ -46,13 +42,25 @@ export class HomePage {
           }
         },
         {
+          text: 'Editar',
+          icon: 'create-outline',
+          handler: () => {
+            console.log(interview.status);
+            if (interview.status === STATUS.TO_SEND) {
+              this.presentSaveModal(interview);
+            } else {
+              this.presentToast("Não é possível editar entrevistas já enviadas!");
+            }
+          }
+        },
+        {
           text: 'Enviar',
           icon: 'navigate-outline',
           handler: () => {
             interview.status = STATUS.SENT;
-            this.storage.set(storage_constants.INTERVIEWS_STORAGE_KEY, this.interviews).then(() => {
-              this.updateInterviewsList();
-            })
+            this.repo.saveInterviews(this.interviews).then(() => {
+              this.presentToast("Entrevista enviada com sucesso!");
+            });
           }
         },
         {
@@ -82,9 +90,9 @@ export class HomePage {
         }, {
           text: 'Sim',
           handler: () => {
-            this.interviews = this.interviews.filter(item => item.createdAt != interview.createdAt);
-            this.storage.set(storage_constants.INTERVIEWS_STORAGE_KEY, this.interviews).then(() => {
-              // pesquisa removida com sucesso!
+            this.interviews = this.interviews.filter(item => item.createdAt.getTime() != interview.createdAt.getTime());
+            this.repo.saveInterviews(this.interviews).then(() => {
+              this.presentToast("Entrevista removida com sucesso!");
             });
           }
         }
@@ -92,6 +100,14 @@ export class HomePage {
     });
 
     await alert.present();
+  }
+
+  async presentToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
   async presentModal(interview: Interview) {
@@ -103,4 +119,25 @@ export class HomePage {
     });
     return await modal.present();
   }
+
+  async presentSaveModal(interview?: Interview) {
+    const value = interview ? interview : new Interview();
+    const modal = await this.modalController.create({
+      component: ModalSaveComponent,
+      componentProps: {
+        'interview': value
+      }
+    });
+
+    modal.onWillDismiss().then((value: any) => {
+      if (value.data.dismissed) {
+        this.updateInterviewsList();
+        this.presentToast("Entrevista salva com sucesso!");
+      }
+    });
+
+
+    return await modal.present();
+  }
+
 }

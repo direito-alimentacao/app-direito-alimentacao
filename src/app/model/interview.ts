@@ -1,16 +1,54 @@
 export enum STATUS {
     TO_SEND = 0,
-    SENT
+    SENT = 1
 };
 
 export class Interview {
 
-    constructor(value: any, isNew: boolean) {
-        Object.assign(this, value);
+    constructor(value?: any) {
+        if (value) {
+            Object.assign(this, value);
+            if (!this.createdAt) {
+                this.status = STATUS.TO_SEND;
+                this.createdAt = new Date();
+            }
+        } else {
+            this.familyLeader = '';
+            this.familyLeaderDocument = '';
+            this.familyAddress = '';
+            this.familyPhoneNumber = '';
+            this.familyCelphoneNumber = '';
+            this.familyNIS = '';
+            this.familyIncome = '';
+            this.familyMembers = '';
+            this.members0To2 = '';
+            this.members2To5 = '';
+            this.members5To18 = '';
+            this.pregnant = '';
+            this.disabledPeople = '';
+            this.oldPeople = '';
+            this.assistanceBPC = false;
+            this.assistanceBF = false;
+            this.assistanceDeath = false;
+            this.assistanceFood = false;
+            this.assistanceOthers = '';
+            this.fsg1q1 = false;
+            this.fsg1q2 = false;
+            this.fsg1q3 = false;
+            this.fsg1q4 = false;
+            this.fsg2q1 = false;
+            this.fsg2q2 = false;
+            this.fsg2q3 = false;
+            this.fsg2q4 = false;
+            this.fsg3q1 = false;
+            this.fsg3q2 = false;
+            this.fsg3q3 = false;
+            this.fsg3q4 = false;
+            this.fsg3q5 = false;
+            this.fsg3q6 = false;
 
-        if (isNew) {
             this.status = STATUS.TO_SEND;
-            this.createdAt = new Date();
+            this.createdAt = null;
         }
     }
 
@@ -29,16 +67,16 @@ export class Interview {
     familyPhoneNumber: string;
     familyCelphoneNumber: string;
     familyNIS: string;
-    familyIncome: number;
-    familyMembers: number;
+    familyIncome: string;
+    familyMembers: string;
 
     // Risk group
-    members0To2: number;
-    members2To5: number;
-    members5To18: number;
-    pregnant: number;
-    disabledPeople: number;
-    oldPeople: number;
+    members0To2: string;
+    members2To5: string;
+    members5To18: string;
+    pregnant: string;
+    disabledPeople: string;
+    oldPeople: string;
 
     // Assistance
     assistanceBPC: boolean;
@@ -46,7 +84,7 @@ export class Interview {
     assistanceDeath: boolean;
     assistanceFood: boolean;
     assistanceOthers: string;
-    
+
     // EBIA  
     fsg1q1: boolean;
     fsg1q2: boolean;

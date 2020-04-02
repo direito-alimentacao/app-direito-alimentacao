@@ -4,7 +4,7 @@
       Minhas entrevistas
     </ion-title>
     <ion-buttons slot="primary">
-      <ion-button fill="solid" color="secondary" [routerLink]="['/add']">
+      <ion-button fill="solid" color="secondary" (click)="presentSaveModal()">
         Nova
         <ion-icon slot="end" name="add-circle"></ion-icon>
       </ion-button>

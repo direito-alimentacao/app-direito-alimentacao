@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
@@ -10,6 +10,8 @@ import { YesNoPipe } from '../yes-no.pipe';
 import localePtBr from '@angular/common/locales/pt';
 
 import { registerLocaleData } from '@angular/common';
+import { ModalSaveComponent } from '../modal-save/modal-save.component';
+import { NgxMaskIonicModule } from 'ngx-mask-ionic';
 
 registerLocaleData(localePtBr);
 
@@ -17,6 +19,8 @@ registerLocaleData(localePtBr);
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgxMaskIonicModule,
     IonicModule,
     RouterModule.forChild([
       {
@@ -25,8 +29,8 @@ registerLocaleData(localePtBr);
       }
     ])
   ],
-  declarations: [HomePage, ModalInterviewComponent, YesNoPipe],
-  entryComponents: [ModalInterviewComponent]
+  declarations: [HomePage, ModalInterviewComponent, ModalSaveComponent, YesNoPipe],
+  entryComponents: [ModalInterviewComponent, ModalSaveComponent]
 
 })
 export class HomePageModule {}

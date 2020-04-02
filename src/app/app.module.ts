@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { IonicStorageModule } from '@ionic/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskIonicModule } from 'ngx-mask-ionic';
+import { RepositoryService } from './services/repository.service';
 
 @NgModule({
   declarations: [AppComponent],

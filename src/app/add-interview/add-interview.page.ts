@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController, IonContent } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Interview } from '../model/interview';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-add-interview',
@@ -31,9 +30,9 @@ export class AddInterviewPage implements OnInit {
     this.storage.get(storage_constants.INTERVIEWS_STORAGE_KEY).then((val) => {
       const items: any[] = val ? val : [];
       items.forEach(element => {
-        this.interviews.push(new Interview(element, false));
+        this.interviews.push(new Interview(element));
       });
-      this.createForm();
+      this.createForm(new Interview());
     });
   }
 
@@ -55,43 +54,43 @@ export class AddInterviewPage implements OnInit {
     aux = aux.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
     if (aux.length > 1) aux = aux.replace(/^0+/, ''); /* Replace leading zeros */
     $event.target.value = "R$ " + aux;
-}
+  }
 
-  private createForm() {
+  private createForm(interview: Interview) {
     this.form = this.formBuilder.group({
-      familyLeader: ['', [Validators.required]],
-      familyLeaderDocument: ['', [Validators.required]],
-      familyAddress: ['', [Validators.required]],
-      familyPhoneNumber: [''],
-      familyCelphoneNumber: [''],
-      familyNIS: [''],
-      familyIncome: ['', [Validators.required]],
-      familyMembers: ['', [Validators.required]],
-      members0To2: ['', [Validators.required]],
-      members2To5: ['', [Validators.required]],
-      members5To18: ['', [Validators.required]],
-      pregnant: ['', [Validators.required]],
-      disabledPeople: ['', [Validators.required]],
-      oldPeople: ['', [Validators.required]],
-      assistanceBPC: [false],
-      assistanceBF: [false],
-      assistanceDeath: [false],
-      assistanceFood: [false],
-      assistanceOthers: [''],
-      fsg1q1: [false],
-      fsg1q2: [false],
-      fsg1q3: [false],
-      fsg1q4: [false],
-      fsg2q1: [false],
-      fsg2q2: [false],
-      fsg2q3: [false],
-      fsg2q4: [false],
-      fsg3q1: [false],
-      fsg3q2: [false],
-      fsg3q3: [false],
-      fsg3q4: [false],
-      fsg3q5: [false],
-      fsg3q6: [false],
+      familyLeader: [interview.familyLeader, [Validators.required]],
+      familyLeaderDocument: [interview.familyLeaderDocument, [Validators.required]],
+      familyAddress: [interview.familyAddress, [Validators.required]],
+      familyPhoneNumber: [interview.familyPhoneNumber],
+      familyCelphoneNumber: [interview.familyCelphoneNumber],
+      familyNIS: [interview.familyNIS],
+      familyIncome: [interview.familyIncome, [Validators.required]],
+      familyMembers: [interview.familyMembers, [Validators.required]],
+      members0To2: [interview.members0To2, [Validators.required]],
+      members2To5: [interview.members2To5, [Validators.required]],
+      members5To18: [interview.members5To18, [Validators.required]],
+      pregnant: [interview.pregnant, [Validators.required]],
+      disabledPeople: [interview.disabledPeople, [Validators.required]],
+      oldPeople: [interview.oldPeople, [Validators.required]],
+      assistanceBPC: [interview.assistanceBPC],
+      assistanceBF: [interview.assistanceBF],
+      assistanceDeath: [interview.assistanceDeath],
+      assistanceFood: [interview.assistanceFood],
+      assistanceOthers: [interview.assistanceOthers],
+      fsg1q1: [interview.fsg1q1],
+      fsg1q2: [interview.fsg1q2],
+      fsg1q3: [interview.fsg1q3],
+      fsg1q4: [interview.fsg1q4],
+      fsg2q1: [interview.fsg2q1],
+      fsg2q2: [interview.fsg2q2],
+      fsg2q3: [interview.fsg2q3],
+      fsg2q4: [interview.fsg2q4],
+      fsg3q1: [interview.fsg3q1],
+      fsg3q2: [interview.fsg3q2],
+      fsg3q3: [interview.fsg3q3],
+      fsg3q4: [interview.fsg3q4],
+      fsg3q5: [interview.fsg3q5],
+      fsg3q6: [interview.fsg3q5],
     });
   }
 
@@ -111,7 +110,7 @@ export class AddInterviewPage implements OnInit {
 
   save() {
     if (this.form.valid) {
-      this.interviews.push(new Interview(this.form.value, true));
+      this.interviews.push(new Interview(this.form.value));
       this.storage.set(storage_constants.INTERVIEWS_STORAGE_KEY, this.interviews).then(() => {
         this.router.navigate(['/home']);
       });
