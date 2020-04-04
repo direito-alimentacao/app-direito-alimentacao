@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>
+      Autenticação
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="presentAlertConfirm()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button fill="solid" color="secondary" (click)="login()" disabled={{!isFormValid()}}>
+        Entrar
+        <ion-icon slot="end" name="log-in-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form *ngIf="form" [formGroup]="form">
+    <ion-list lines="full">
+      <ion-item>
+        <ion-label position="floating">Email *</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+        <div *ngIf="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)">
+          <ion-text color="danger" *ngIf="form.controls.email.errors.required">
+            <small>Informar seu email.</small>
+          </ion-text>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Senha *</ion-label>
+        <ion-input type="password" maxlength="8" formControlName="password"></ion-input>
+        <div *ngIf="form.controls.password.invalid && (form.controls.password.dirty || form.controls.password.touched)">
+          <ion-text color="danger" *ngIf="form.controls.password.errors.required">
+            <small>Informar sua senha.</small>
+          </ion-text>
+        </div>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

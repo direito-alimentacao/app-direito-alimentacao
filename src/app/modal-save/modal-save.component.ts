@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AlertController, IonContent, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Interview } from '../model/interview';
@@ -8,7 +8,7 @@ import { RepositoryService } from '../services/repository.service';
 @Component({
   selector: 'app-modal-save',
   templateUrl: './modal-save.component.html',
-  styleUrls: ['./modal-save.component.scss'],
+  styleUrls: ['./modal-save.component.scss']
 })
 export class ModalSaveComponent implements OnInit {
 
@@ -18,6 +18,7 @@ export class ModalSaveComponent implements OnInit {
 
   @Input() interview: Interview;
   @ViewChild('iContent', { static: false }) cont: IonContent;
+
 
   constructor(private repo: RepositoryService,
     private formBuilder: FormBuilder,
@@ -46,13 +47,10 @@ export class ModalSaveComponent implements OnInit {
 
   formatCurrency($event) {
     var aux = $event.target.value;
-    aux = aux.replace(/\./g, "");
+    aux = aux.replace(/\,/g, "");
     aux = aux.replace(/\s/g, "");
-    aux = aux.replace(/\R/g, "");
-    aux = aux.replace(/\$/g, "");
-    aux = aux.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-    if (aux.length > 1) aux = aux.replace(/^0+/, ''); /* Replace leading zeros */
-    $event.target.value = "R$ " + aux;
+    if (aux.length > 1) aux = aux.replace(/^0+/, '1,'); /* Replace leading zeros */
+    $event.target.value = aux;
   }
 
   private createForm() {
@@ -109,8 +107,9 @@ export class ModalSaveComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
-      if (!this.interview.createdAt) {
-        this.repo.addInterview(new Interview(this.form.value)).then(() => {
+      const value = new Interview(this.form.value);
+      if (!this.interview.interviewDate) {
+        this.repo.addInterview(value).then(() => {
           this.modalController.dismiss(
             {
               'dismissed': true
@@ -118,9 +117,8 @@ export class ModalSaveComponent implements OnInit {
           );
         });
       } else {
-        const value = new Interview(this.form.value);
-        value.createdAt = this.interview.createdAt;
-        this.interviews = this.interviews.map(item => item.createdAt.getTime() == value.createdAt.getTime() ? value : item);
+        value.interviewDate = this.interview.interviewDate;
+        this.interviews = this.interviews.map(item => item.interviewDate.getTime() == value.interviewDate.getTime() ? value : item);
         this.repo.saveInterviews(this.interviews).then(() => {
           this.modalController.dismiss(
             {

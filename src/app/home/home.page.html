@@ -19,7 +19,7 @@
     </div>
     <ion-item lines="full" (click)="presentActionSheet(interview)" *ngFor="let interview of interviews">
       <ion-thumbnail slot="start">
-        <p class="ion-text-center">{{interview.createdAt | date: 'dd/MM'}}</p>
+        <p class="ion-text-center">{{interview.interviewDate | date: 'dd/MM'}}</p>
       </ion-thumbnail>
 
       <ion-label>
@@ -27,8 +27,7 @@
         <p>{{interview.familyAddress}}</p>
       </ion-label>
 
-      <ion-icon *ngIf="interview.hasSent()" name="checkmark-done-outline" slot="end"></ion-icon>
-      <ion-icon *ngIf="!interview.hasSent()" name="checkmark-outline" slot="end"></ion-icon>
+      <ion-icon color="{{interview.wasSent ? 'success' : 'danger'}}" name="{{interview.wasSent ? 'checkmark-done-outline' : 'checkmark-outline'}}" slot="end"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -14,12 +14,12 @@ import { environment } from '../environments/environment';
 import { IonicStorageModule } from '@ionic/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskIonicModule } from 'ngx-mask-ionic';
-import { RepositoryService } from './services/repository.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, IonicModule.forRoot(), NgxMaskIonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+  imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule, IonicModule.forRoot(), NgxMaskIonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
     SplashScreen,

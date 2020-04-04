@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, ModalController, AlertController, ToastController } from '@ionic/angular';
-import { Interview, STATUS } from '../model/interview';
+import { ActionSheetController, ModalController, AlertController, ToastController, LoadingController } from '@ionic/angular';
+import { Interview } from '../model/interview';
 import { ModalInterviewComponent } from '../modal-interview/modal-interview.component';
 import { RepositoryService } from '../services/repository.service';
 import { ModalSaveComponent } from '../modal-save/modal-save.component';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +20,9 @@ export class HomePage {
     private modalController: ModalController,
     private alertController: AlertController,
     private toastController: ToastController,
-    private repo: RepositoryService) {
-
+    private repo: RepositoryService,
+    private http: HttpClient,
+    private loadingController: LoadingController) {
   }
 
   ionViewDidEnter() {
@@ -45,8 +48,7 @@ export class HomePage {
           text: 'Editar',
           icon: 'create-outline',
           handler: () => {
-            console.log(interview.status);
-            if (interview.status === STATUS.TO_SEND) {
+            if (!interview.wasSent) {
               this.presentSaveModal(interview);
             } else {
               this.presentToast("Não é possível editar entrevistas já enviadas!");
@@ -57,10 +59,14 @@ export class HomePage {
           text: 'Enviar',
           icon: 'navigate-outline',
           handler: () => {
-            interview.status = STATUS.SENT;
-            this.repo.saveInterviews(this.interviews).then(() => {
-              this.presentToast("Entrevista enviada com sucesso!");
-            });
+            if (!interview.wasSent) {
+              // if logged
+              // this.presentLoading(interview);
+              // else
+              this.presentLoginModal(interview);
+            } else {
+              this.presentToast("Entrevista já enviada!")
+            }
           }
         },
         {
@@ -79,6 +85,35 @@ export class HomePage {
     await actionSheet.present();
   }
 
+  async presentLoading(interview: Interview) {
+    const loading = await this.loadingController.create({
+      message: 'Enviando...'
+    });
+    await loading.present();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    this.http.post<any>('https://direito-alimentacao.herokuapp.com/api/dados_pessoais/store',
+      JSON.stringify(interview), httpOptions).subscribe(data => {
+        console.log(data);
+        interview.wasSent = true;
+        this.repo.saveInterviews(this.interviews).then(() => {
+          loading.dismiss();
+          this.presentToast("Entrevista enviada com sucesso!");
+        });
+      }, error => {
+        console.log(error.message);
+        loading.dismiss();
+        this.presentToast("Ops, algo deu errado! Tente novamente mais tarde.");
+      });
+
+
+  }
+
   async presentAlertConfirm(interview: Interview) {
     const alert = await this.alertController.create({
       header: 'Atenção!',
@@ -90,7 +125,7 @@ export class HomePage {
         }, {
           text: 'Sim',
           handler: () => {
-            this.interviews = this.interviews.filter(item => item.createdAt.getTime() != interview.createdAt.getTime());
+            this.interviews = this.interviews.filter(item => item.interviewDate.getTime() != interview.interviewDate.getTime());
             this.repo.saveInterviews(this.interviews).then(() => {
               this.presentToast("Entrevista removida com sucesso!");
             });
@@ -113,6 +148,7 @@ export class HomePage {
   async presentModal(interview: Interview) {
     const modal = await this.modalController.create({
       component: ModalInterviewComponent,
+      backdropDismiss: false,
       componentProps: {
         'interview': interview
       }
@@ -120,10 +156,14 @@ export class HomePage {
     return await modal.present();
   }
 
+
+
   async presentSaveModal(interview?: Interview) {
     const value = interview ? interview : new Interview();
+    console.log(value);
     const modal = await this.modalController.create({
       component: ModalSaveComponent,
+      backdropDismiss: false,
       componentProps: {
         'interview': value
       }
@@ -133,6 +173,23 @@ export class HomePage {
       if (value.data.dismissed) {
         this.updateInterviewsList();
         this.presentToast("Entrevista salva com sucesso!");
+      }
+    });
+
+
+    return await modal.present();
+  }
+
+  async presentLoginModal(interview: Interview) {
+    const modal = await this.modalController.create({
+      component: LoginComponent,
+      backdropDismiss: false
+    });
+
+    modal.onWillDismiss().then((value: any) => {
+      if (value.data.token) {
+        // store token
+        this.presentLoading(interview);
       }
     });
 

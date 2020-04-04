@@ -11,16 +11,17 @@ import localePtBr from '@angular/common/locales/pt';
 
 import { registerLocaleData } from '@angular/common';
 import { ModalSaveComponent } from '../modal-save/modal-save.component';
-import { NgxMaskIonicModule } from 'ngx-mask-ionic';
 
+import { NgxMaskIonicModule } from 'ngx-mask-ionic';
+import { LoginComponent } from '../login/login.component';
 registerLocaleData(localePtBr);
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     NgxMaskIonicModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild([
       {
@@ -29,8 +30,8 @@ registerLocaleData(localePtBr);
       }
     ])
   ],
-  declarations: [HomePage, ModalInterviewComponent, ModalSaveComponent, YesNoPipe],
-  entryComponents: [ModalInterviewComponent, ModalSaveComponent]
+  declarations: [HomePage, ModalInterviewComponent, LoginComponent, ModalSaveComponent, YesNoPipe],
+  entryComponents: [ModalInterviewComponent, LoginComponent, ModalSaveComponent]
 
 })
-export class HomePageModule {}
+export class HomePageModule { }

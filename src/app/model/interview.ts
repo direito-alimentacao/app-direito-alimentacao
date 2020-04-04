@@ -1,16 +1,12 @@
-export enum STATUS {
-    TO_SEND = 0,
-    SENT = 1
-};
-
 export class Interview {
 
     constructor(value?: any) {
+        this.contemplated = false;
         if (value) {
             Object.assign(this, value);
-            if (!this.createdAt) {
-                this.status = STATUS.TO_SEND;
-                this.createdAt = new Date();
+            if (!this.interviewDate) {
+                this.wasSent = false;
+                this.interviewDate = new Date();
             }
         } else {
             this.familyLeader = '';
@@ -18,15 +14,15 @@ export class Interview {
             this.familyAddress = '';
             this.familyPhoneNumber = '';
             this.familyCelphoneNumber = '';
-            this.familyNIS = '';
-            this.familyIncome = '';
-            this.familyMembers = '';
-            this.members0To2 = '';
-            this.members2To5 = '';
-            this.members5To18 = '';
-            this.pregnant = '';
-            this.disabledPeople = '';
-            this.oldPeople = '';
+            this.familyNIS = null;
+            this.familyIncome = null;
+            this.familyMembers = null;
+            this.members0To2 = null;
+            this.members2To5 = null;
+            this.members5To18 = null;
+            this.pregnant = null;
+            this.disabledPeople = null;
+            this.oldPeople = null;
             this.assistanceBPC = false;
             this.assistanceBF = false;
             this.assistanceDeath = false;
@@ -46,19 +42,15 @@ export class Interview {
             this.fsg3q4 = false;
             this.fsg3q5 = false;
             this.fsg3q6 = false;
-
-            this.status = STATUS.TO_SEND;
-            this.createdAt = null;
+            this.wasSent = false;
+            this.interviewDate = null;
         }
     }
 
-    public hasSent(): boolean {
-        return this.status == STATUS.SENT;
-    }
-
-    status: STATUS;
-    createdAt: Date;
+    wasSent: boolean;
+    interviewDate: Date;
     agentName: string;
+    contemplated : boolean;
 
     // Identification
     familyLeader: string;
@@ -66,17 +58,17 @@ export class Interview {
     familyAddress: string;
     familyPhoneNumber: string;
     familyCelphoneNumber: string;
-    familyNIS: string;
-    familyIncome: string;
-    familyMembers: string;
+    familyNIS: number;
+    familyIncome: number;
+    familyMembers: number;
 
     // Risk group
-    members0To2: string;
-    members2To5: string;
-    members5To18: string;
-    pregnant: string;
-    disabledPeople: string;
-    oldPeople: string;
+    members0To2: number;
+    members2To5: number;
+    members5To18: number;
+    pregnant: number;
+    disabledPeople: number;
+    oldPeople: number;
 
     // Assistance
     assistanceBPC: boolean;
