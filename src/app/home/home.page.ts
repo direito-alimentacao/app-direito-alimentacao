@@ -18,7 +18,7 @@ export class HomePage {
   interviews: Interview[];
   user: User;
 
-  private API_BASE_URL: string = 'https://direito-alimentacao.herokuapp.com/api';
+  private API_BASE_URL: string = 'https://direitoalimentacao.herokuapp.com/api';
 
   constructor(private actionSheetController: ActionSheetController,
     private modalController: ModalController,
@@ -29,18 +29,13 @@ export class HomePage {
     private loadingController: LoadingController) {
   }
 
-  ionViewDidEnter() {
+  async ionViewDidEnter() {
     this.updateInterviewsList();
     this.updateUserData();
   }
 
   private async updateInterviewsList() {
     this.interviews = await this.repo.getInterviews();
-    this.interviews.forEach(item => {
-      if (!item.wasSent) {
-        return this.presentToast("Atenção: há entrevistas não enviadas!")
-      } 
-    })
   }
 
   private async updateUserData() {

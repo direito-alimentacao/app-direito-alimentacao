@@ -13,7 +13,7 @@ import { User } from '../model/user';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
-  private API_BASE_URL: string = 'https://direito-alimentacao.herokuapp.com/api';
+  private API_BASE_URL: string = 'https://direitoalimentacao.herokuapp.com/api';
 
   constructor(private formBuilder: FormBuilder,
     private alertController: AlertController,
