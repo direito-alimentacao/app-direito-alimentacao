@@ -99,16 +99,18 @@ export class HomePage {
 
     this.http.post<any>('https://direito-alimentacao.herokuapp.com/api/dados_pessoais/store',
       JSON.stringify(interview), httpOptions).subscribe(data => {
-        console.log(data);
-        interview.wasSent = true;
-        this.repo.saveInterviews(this.interviews).then(() => {
-          loading.dismiss();
-          this.presentToast("Entrevista enviada com sucesso!");
-        });
+        // do nothing
       }, error => {
-        console.log(error.message);
-        loading.dismiss();
-        this.presentToast("Ops, algo deu errado! Tente novamente mais tarde.");
+        if (error.status == 200) {
+          interview.wasSent = true;
+          this.repo.saveInterviews(this.interviews).then(() => {
+            loading.dismiss();
+            this.presentToast("Entrevista enviada com sucesso!");
+          });
+        } else {
+          loading.dismiss();
+          this.presentToast("Ops, algo deu errado! Tente novamente mais tarde.");
+        }
       });
 
 
