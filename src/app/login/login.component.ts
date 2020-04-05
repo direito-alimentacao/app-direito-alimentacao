@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { AlertController, IonContent, ModalController, ToastController } from '@ionic/angular';
+import { AlertController, IonContent, ModalController, ToastController, LoadingController } from '@ionic/angular';
 import { RepositoryService } from '../services/repository.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../model/user';
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private repo: RepositoryService,
     private toastController: ToastController,
+    private loadingController: LoadingController,
     private modalController: ModalController) {
   }
 
@@ -40,29 +41,41 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.form.valid) {
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-      };
-
-      this.http.post<any>(`${this.API_BASE_URL}/auth/login`,
-        JSON.stringify(this.form.value), httpOptions).subscribe(data => {
-          let user: User = new User();
-          user.token = data.access_token;
-          user.userId = data.user_id;
-          this.repo.saveUser(user).then(() => {
-            this.modalController.dismiss(
-              {
-                'dismissed': true
-              }
-            );
-          })
-        }, error => {
-          this.presentToast("Erro na autenticação: login/senha inválido!")
-        });
+      this.presentLoading();
     }
   }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Autenticando...'
+    });
+    await loading.present();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    this.http.post<any>(`${this.API_BASE_URL}/auth/login`,
+      JSON.stringify(this.form.value), httpOptions).subscribe(data => {
+        let user: User = new User();
+        user.token = data.access_token;
+        user.userId = data.user_id;
+        this.repo.saveUser(user).then(() => {
+          loading.dismiss();
+          this.modalController.dismiss(
+            {
+              'dismissed': true
+            }
+          );
+        })
+      }, error => {
+        loading.dismiss();
+        this.presentToast("Erro na autenticação: login/senha inválido!")
+      });
+  }
+
 
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
