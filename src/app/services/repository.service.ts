@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { storage_constants } from '../constants';
 import { Interview } from '../model/interview';
 import 'rxjs/Rx';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,16 @@ export class RepositoryService {
         }
       )
     });
+  }
+
+  async getUser(): Promise<User> {
+    return this.storage.get(storage_constants.USER_STORAGE_KEY).then((val: any) => {
+      return val ? new User(val) : new User();
+    });
+  }
+
+  async saveUser(user: User): Promise<any> {
+    return this.storage.set(storage_constants.USER_STORAGE_KEY, user);
   }
 
   async saveInterviews(interviews: Interview[]): Promise<any> {

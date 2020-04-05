@@ -44,12 +44,13 @@ export class Interview {
             this.fsg3q6 = false;
             this.wasSent = false;
             this.interviewDate = null;
+            this.idAgent = null;
         }
     }
 
     wasSent: boolean;
     interviewDate: Date;
-    agentName: string;
+    idAgent: string;
     contemplated : boolean;
 
     // Identification

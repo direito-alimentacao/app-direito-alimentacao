@@ -6,6 +6,7 @@ import { RepositoryService } from '../services/repository.service';
 import { ModalSaveComponent } from '../modal-save/modal-save.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginComponent } from '../login/login.component';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,9 @@ import { LoginComponent } from '../login/login.component';
 export class HomePage {
 
   interviews: Interview[];
+  user: User;
+
+  private API_BASE_URL: string = 'https://direito-alimentacao.herokuapp.com/api';
 
   constructor(private actionSheetController: ActionSheetController,
     private modalController: ModalController,
@@ -27,10 +31,20 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.updateInterviewsList();
+    this.updateUserData();
   }
 
   private async updateInterviewsList() {
     this.interviews = await this.repo.getInterviews();
+    this.interviews.forEach(item => {
+      if (!item.wasSent) {
+        return this.presentToast("Atenção: há entrevistas não enviadas!")
+      } 
+    })
+  }
+
+  private async updateUserData() {
+    this.user = await this.repo.getUser();
   }
 
   async presentActionSheet(interview: Interview) {
@@ -60,13 +74,15 @@ export class HomePage {
           icon: 'navigate-outline',
           handler: () => {
             if (!interview.wasSent) {
-              // if logged
-              // this.presentLoading(interview);
-              // else
-              this.presentLoginModal(interview);
+              if (!this.user.token) {
+                this.presentLoginModal(interview);
+              } else {
+                this.presentLoading(interview);
+              }
             } else {
               this.presentToast("Entrevista já enviada!")
             }
+
           }
         },
         {
@@ -93,11 +109,14 @@ export class HomePage {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer: ${this.user.token}`
       })
     };
 
-    this.http.post<any>('https://direito-alimentacao.herokuapp.com/api/dados_pessoais/store',
+    interview.idAgent = this.user.userId;
+
+    this.http.post<any>(`${this.API_BASE_URL}/dados_pessoais/store`,
       JSON.stringify(interview), httpOptions).subscribe(data => {
         // do nothing
       }, error => {
@@ -107,13 +126,13 @@ export class HomePage {
             loading.dismiss();
             this.presentToast("Entrevista enviada com sucesso!");
           });
+        } else if (error.status == 401) {
+          this.presentLoginModal(interview);
         } else {
           loading.dismiss();
           this.presentToast("Ops, algo deu errado! Tente novamente mais tarde.");
         }
       });
-
-
   }
 
   async presentAlertConfirm(interview: Interview) {
@@ -162,7 +181,6 @@ export class HomePage {
 
   async presentSaveModal(interview?: Interview) {
     const value = interview ? interview : new Interview();
-    console.log(value);
     const modal = await this.modalController.create({
       component: ModalSaveComponent,
       backdropDismiss: false,
@@ -188,13 +206,12 @@ export class HomePage {
       backdropDismiss: false
     });
 
-    modal.onWillDismiss().then((value: any) => {
-      if (value.data.token) {
-        // store token
+    modal.onWillDismiss().then(async (value: any) => {
+      if (value.data.dismissed) {
+        await this.updateUserData();
         this.presentLoading(interview);
       }
     });
-
 
     return await modal.present();
   }

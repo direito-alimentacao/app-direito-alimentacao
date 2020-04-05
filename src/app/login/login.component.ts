@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { AlertController, IonContent, ModalController } from '@ionic/angular';
-import { Router } from '@angular/router';
-import { Interview } from '../model/interview';
+import { AlertController, IonContent, ModalController, ToastController } from '@ionic/angular';
 import { RepositoryService } from '../services/repository.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +13,13 @@ import { RepositoryService } from '../services/repository.service';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  private API_BASE_URL: string = 'https://direito-alimentacao.herokuapp.com/api';
 
   constructor(private formBuilder: FormBuilder,
     private alertController: AlertController,
+    private http: HttpClient,
+    private repo: RepositoryService,
+    private toastController: ToastController,
     private modalController: ModalController) {
   }
 
@@ -36,12 +40,36 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.form.valid) {
-      this.modalController.dismiss(
-        {
-          'token': '123456'
-        }
-      );
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+
+      this.http.post<any>(`${this.API_BASE_URL}/auth/login`,
+        JSON.stringify(this.form.value), httpOptions).subscribe(data => {
+          let user: User = new User();
+          user.token = data.access_token;
+          user.userId = data.user_id;
+          this.repo.saveUser(user).then(() => {
+            this.modalController.dismiss(
+              {
+                'dismissed': true
+              }
+            );
+          })
+        }, error => {
+          this.presentToast("Erro na autenticação: login/senha inválido!")
+        });
     }
+  }
+
+  async presentToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
   async presentAlertConfirm() {
@@ -57,7 +85,7 @@ export class LoginComponent implements OnInit {
           handler: () => {
             this.modalController.dismiss(
               {
-                'token': null
+                'dismissed': false
               }
             );
           }
