@@ -1,0 +1,26 @@
+<ion-content color="secondary">
+  <div class="fullheight xc ion-text-center">
+    <ion-card class="ion-padding">
+      <img src="../../assets/icons/icon-72x72.png" />
+      <ion-card-header>
+        <ion-card-title><strong>Direito à Alimentação</strong></ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        Uma alimentação digna é um direito de todo cidadão.
+      </ion-card-content>
+      <ion-button fill="clear" color="secondary" expand="block" [routerLink]="['/home']">
+        <ion-icon slot="start" name="caret-forward-circle-outline"></ion-icon>
+        Começar
+      </ion-button>
+    </ion-card>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="ion-text-center">
+      <small>Di@ (v.1.1) - DNU/DCC/UFLA &copy; {{year | date: 'yyyy'}}</small>
+    </div>
+  </ion-toolbar>
+</ion-footer>

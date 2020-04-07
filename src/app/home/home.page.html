@@ -23,8 +23,8 @@
       </ion-thumbnail>
 
       <ion-label>
-        <h2>{{interview.familyLeader}}</h2>
-        <p>{{interview.familyAddress}}</p>
+        <h2>{{interview.familyLeader | uppercase}}</h2>
+        <p>{{interview.familyAddress | uppercase}}</p>
       </ion-label>
 
       <ion-icon color="{{interview.wasSent ? 'success' : 'danger'}}" name="{{interview.wasSent ? 'checkmark-done-outline' : 'checkmark-outline'}}" slot="end"></ion-icon>
