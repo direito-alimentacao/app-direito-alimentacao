@@ -36,7 +36,7 @@
     </ion-item-divider>
     <ion-item>
       <ion-label>
-        <h2>Foi enviada ao servidor?</h2>
+        <h2>Foi enviada ao CRAS?</h2>
         <ion-text color="{{interview.wasSent ? 'success' : 'danger'}}">
           <ion-icon name="{{interview.wasSent ? 'checkmark-done-outline' : 'checkmark-outline'}}"></ion-icon>
           {{interview.wasSent | yesNo}}
@@ -80,8 +80,8 @@
     </ion-item>
 
     <ion-item>
-      <ion-label>
-        <h2>NIS</h2>
+      <ion-label class="ion-text-wrap">
+        <h2>Número de Identificação Social (NIS)</h2>
         <p>{{interview.familyNIS}}</p>
       </ion-label>
     </ion-item>
@@ -154,8 +154,8 @@
     </ion-item-divider>
 
     <ion-item>
-      <ion-label>
-        <h2>BPC</h2>
+      <ion-label class="ion-text-wrap">
+        <h2>Benefício Assistencial à Pessoa com Deficiência (BPC)</h2>
         <ion-text color="{{interview.assistanceBPC ? 'danger' : 'black'}}">{{interview.assistanceBPC | yesNo}}
         </ion-text>
       </ion-label>
