@@ -77,7 +77,20 @@ export class HomePage {
             } else {
               this.presentToast("Entrevista já enviada!")
             }
-
+          }
+        },
+        {
+          text: 'Desbloquear',
+          icon: 'lock-open-outline',
+          handler: () => {
+            if (interview.wasSent) {
+              interview.wasSent = false;
+              this.repo.saveInterviews(this.interviews).then(() => {
+                this.presentToast("Entrevista desbloqueada com sucesso!");
+              });
+            } else {
+              this.presentToast("Entrevista não enviada ainda!")
+            }
           }
         },
         {
@@ -133,7 +146,7 @@ export class HomePage {
   async presentAlertConfirm(interview: Interview) {
     const alert = await this.alertController.create({
       header: 'Atenção!',
-      message: 'Você deseja sair <strong>remover</strong> esta entrevista?',
+      message: 'Você deseja <strong>remover</strong> esta entrevista?',
       buttons: [
         {
           text: 'Não',
