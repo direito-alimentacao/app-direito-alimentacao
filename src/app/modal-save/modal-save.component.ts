@@ -25,7 +25,7 @@ export class ModalSaveComponent implements OnInit {
     private alertController: AlertController,
     private router: Router,
     private modalController: ModalController) {
-    this.numberOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    this.numberOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   }
 
   async ngOnInit() {
@@ -63,12 +63,12 @@ export class ModalSaveComponent implements OnInit {
       familyNIS: [this.interview.familyNIS],
       familyIncome: [this.interview.familyIncome, [Validators.required]],
       familyMembers: [this.interview.familyMembers, [Validators.required]],
-      members0To2: [this.interview.members0To2, [Validators.required]],
-      members2To5: [this.interview.members2To5, [Validators.required]],
-      members5To18: [this.interview.members5To18, [Validators.required]],
-      pregnant: [this.interview.pregnant, [Validators.required]],
-      disabledPeople: [this.interview.disabledPeople, [Validators.required]],
-      oldPeople: [this.interview.oldPeople, [Validators.required]],
+      members0To2: [this.interview.members0To2],
+      members2To5: [this.interview.members2To5],
+      members5To18: [this.interview.members5To18],
+      pregnant: [this.interview.pregnant],
+      disabledPeople: [this.interview.disabledPeople],
+      oldPeople: [this.interview.oldPeople],
       assistanceBPC: [this.interview.assistanceBPC],
       assistanceBF: [this.interview.assistanceBF],
       assistanceDeath: [this.interview.assistanceDeath],

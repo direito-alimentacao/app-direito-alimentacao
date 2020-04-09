@@ -127,87 +127,51 @@
         </ion-item-divider>
 
         <ion-item>
-          <ion-label>Membros familiares (0-2 anos) *</ion-label>
+          <ion-label>Membros familiares (0-2 anos)</ion-label>
           <ion-select okText="OK" cancelText="Cancelar" formControlName="members0To2">
-            <ion-select-option value="">-</ion-select-option>
+            <ion-select-option>0</ion-select-option>
             <ion-select-option *ngFor="let n of numberOptions">{{n}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item
-          *ngIf="form.controls.members0To2.invalid && (form.controls.members0To2.dirty || form.controls.members0To2.touched)">
-          <ion-text color="danger" *ngIf="form.controls.members0To2.errors.required">
-            <br /><small>Informar o número de membros familiares de 0 a 2 anos.</small>
-          </ion-text>
-        </ion-item>
 
         <ion-item>
-          <ion-label>Membros familiares (2-5 anos) *</ion-label>
+          <ion-label>Membros familiares (2-5 anos)</ion-label>
           <ion-select okText="OK" cancelText="Cancelar" formControlName="members2To5">
-            <ion-select-option value="">-</ion-select-option>
+            <ion-select-option>0</ion-select-option>
             <ion-select-option *ngFor="let n of numberOptions">{{n}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item
-          *ngIf="form.controls.members2To5.invalid && (form.controls.members2To5.dirty || form.controls.members2To5.touched)">
-          <ion-text color="danger" *ngIf="form.controls.members2To5.errors.required">
-            <br /><small>Informar o número de membros familiares de 2 a 5 anos.</small>
-          </ion-text>
-        </ion-item>
 
         <ion-item>
-          <ion-label>Membros familiares (5-18 anos) *</ion-label>
+          <ion-label>Membros familiares (5-18 anos)</ion-label>
           <ion-select okText="OK" cancelText="Cancelar" formControlName="members5To18">
-            <ion-select-option value="">-</ion-select-option>
+            <ion-select-option>0</ion-select-option>
             <ion-select-option *ngFor="let n of numberOptions">{{n}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item
-          *ngIf="form.controls.members5To18.invalid && (form.controls.members5To18.dirty || form.controls.members5To18.touched)">
-          <ion-text color="danger" *ngIf="form.controls.members5To18.errors.required">
-            <br /><small>Informar o número de membros familiares de 5 a 18 anos.</small>
-          </ion-text>
-        </ion-item>
 
         <ion-item>
-          <ion-label>Gestantes *</ion-label>
+          <ion-label>Gestantes</ion-label>
           <ion-select okText="OK" cancelText="Cancelar" formControlName="pregnant">
-            <ion-select-option value="">-</ion-select-option>
+            <ion-select-option>0</ion-select-option>
             <ion-select-option *ngFor="let n of numberOptions">{{n}}</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item
-          *ngIf="form.controls.pregnant.invalid && (form.controls.pregnant.dirty || form.controls.pregnant.touched)">
-          <ion-text color="danger" *ngIf="form.controls.pregnant.errors.required">
-            <br /><small>Informar o número de gestantes.</small>
-          </ion-text>
-        </ion-item>
 
         <ion-item>
-          <ion-label>Deficientes *</ion-label>
+          <ion-label>Deficientes</ion-label>
           <ion-select okText="OK" cancelText="Cancelar" formControlName="disabledPeople">
-            <ion-select-option value="">-</ion-select-option>
+            <ion-select-option>0</ion-select-option>
             <ion-select-option *ngFor="let n of numberOptions">{{n}}</ion-select-option>
           </ion-select>
-        </ion-item>
-        <ion-item
-          *ngIf="form.controls.disabledPeople.invalid && (form.controls.disabledPeople.dirty || form.controls.disabledPeople.touched)">
-          <ion-text color="danger" *ngIf="form.controls.disabledPeople.errors.required">
-            <br /><small>Informar o número de deficientes.</small>
-          </ion-text>
         </ion-item>
 
         <ion-item>
-          <ion-label>Idosos *</ion-label>
+          <ion-label>Idosos</ion-label>
           <ion-select okText="OK" cancelText="Cancelar" formControlName="oldPeople">
-            <ion-select-option value="">-</ion-select-option>
+            <ion-select-option>0</ion-select-option>
             <ion-select-option *ngFor="let n of numberOptions">{{n}}</ion-select-option>
           </ion-select>
-        </ion-item>
-        <ion-item
-          *ngIf="form.controls.oldPeople.invalid && (form.controls.oldPeople.dirty || form.controls.oldPeople.touched)">
-          <ion-text color="danger" *ngIf="form.controls.oldPeople.errors.required">
-            <br /><small>Informar o número de idosos.</small>
-          </ion-text>
         </ion-item>
 
         <ion-item-divider id="assistance">
@@ -243,7 +207,7 @@
 
         <ion-item-divider id="feedSafety">
           <ion-label class="ion-text-wrap">
-            Segurança alimentar (ÚLTIMOS 3 MESES)
+            Segurança alimentar - <ion-text color="danger">ÚLTIMOS 3 MESES</ion-text>
             <br /><strong>Marque em caso POSITIVO</strong>
           </ion-label>
         </ion-item-divider>
@@ -282,10 +246,11 @@
       </ion-item-group>
 
       <!-- Second group of feed safety questions -->
-      <ion-item-group *ngIf="showFeedSafetyGroup2()">
+      <ion-item-group>
         <ion-item-divider>
           <ion-label class="ion-text-wrap">
-            <strong>MAIORES de 18 anos</strong>
+            MAIORES de 18 anos - <ion-text color="danger">ÚLTIMOS 3 MESES</ion-text>
+            <br /><strong>Marque em caso POSITIVO</strong>
           </ion-label>
         </ion-item-divider>
 
@@ -322,10 +287,11 @@
       </ion-item-group>
 
       <!-- Third group of feed safety questions -->
-      <ion-item-group *ngIf="showFeedSafetyGroup3()">
+      <ion-item-group>
         <ion-item-divider>
           <ion-label class="ion-text-wrap">
-            <strong>MENORES de 18 anos</strong>
+            MENORES de 18 anos - <ion-text color="danger">ÚLTIMOS 3 MESES</ion-text>
+            <br /><strong>Marque em caso POSITIVO</strong>
           </ion-label>
         </ion-item-divider>
 

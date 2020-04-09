@@ -84,10 +84,7 @@ export class HomePage {
           icon: 'lock-open-outline',
           handler: () => {
             if (interview.wasSent) {
-              interview.wasSent = false;
-              this.repo.saveInterviews(this.interviews).then(() => {
-                this.presentToast("Entrevista desbloqueada com sucesso!");
-              });
+              this.presentAlertConfirmUnlock(interview);
             } else {
               this.presentToast("Entrevista não enviada ainda!")
             }
@@ -157,6 +154,29 @@ export class HomePage {
             this.interviews = this.interviews.filter(item => item.interviewDate.getTime() != interview.interviewDate.getTime());
             this.repo.saveInterviews(this.interviews).then(() => {
               this.presentToast("Entrevista removida com sucesso!");
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertConfirmUnlock(interview: Interview) {
+    const alert = await this.alertController.create({
+      header: 'Atenção!',
+      message: 'Ao <strong>desbloquear</strong> a entrevista, ela será considerada uma nova entrevista a ser enviada ao CRAS. Confirmar?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel'
+        }, {
+          text: 'Sim',
+          handler: () => {
+            interview.wasSent = false;
+            this.repo.saveInterviews(this.interviews).then(() => {
+              this.presentToast("Entrevista desbloqueada com sucesso!");
             });
           }
         }

@@ -17,12 +17,12 @@ export class Interview {
             this.familyNIS = null;
             this.familyIncome = null;
             this.familyMembers = null;
-            this.members0To2 = null;
-            this.members2To5 = null;
-            this.members5To18 = null;
-            this.pregnant = null;
-            this.disabledPeople = null;
-            this.oldPeople = null;
+            this.members0To2 = "0";
+            this.members2To5 = "0";
+            this.members5To18 = "0";
+            this.pregnant = "0";
+            this.disabledPeople = "0";
+            this.oldPeople = "0";
             this.assistanceBPC = false;
             this.assistanceBF = false;
             this.assistanceDeath = false;
@@ -64,12 +64,12 @@ export class Interview {
     familyMembers: number;
 
     // Risk group
-    members0To2: number;
-    members2To5: number;
-    members5To18: number;
-    pregnant: number;
-    disabledPeople: number;
-    oldPeople: number;
+    members0To2: string;
+    members2To5: string;
+    members5To18: string;
+    pregnant: string;
+    disabledPeople: string;
+    oldPeople: string;
 
     // Assistance
     assistanceBPC: boolean;
