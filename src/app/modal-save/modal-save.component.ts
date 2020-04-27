@@ -55,6 +55,7 @@ export class ModalSaveComponent implements OnInit {
 
   private createForm() {
     this.form = this.formBuilder.group({
+      agentName: [this.interview.agentName, [Validators.required]],
       familyLeader: [this.interview.familyLeader, [Validators.required]],
       familyLeaderDocument: [this.interview.familyLeaderDocument, [Validators.required]],
       familyAddress: [this.interview.familyAddress, [Validators.required]],

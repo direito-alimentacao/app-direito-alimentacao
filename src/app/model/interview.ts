@@ -9,6 +9,7 @@ export class Interview {
                 this.interviewDate = new Date();
             }
         } else {
+            this.agentName = '';
             this.familyLeader = '';
             this.familyLeaderDocument = '';
             this.familyAddress = '';
@@ -52,6 +53,7 @@ export class Interview {
     interviewDate: Date;
     idAgent: string;
     contemplated : boolean;
+    agentName: string;
 
     // Identification
     familyLeader: string;
