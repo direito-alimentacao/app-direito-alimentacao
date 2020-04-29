@@ -42,6 +42,11 @@ export class HomePage {
     this.user = await this.repo.getUser();
   }
 
+  async logout() {
+    await this.repo.deleteUser();
+    this.user = null;
+  }
+
   async presentActionSheet(interview: Interview) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Ações',
@@ -69,7 +74,7 @@ export class HomePage {
           icon: 'navigate-outline',
           handler: () => {
             if (!interview.wasSent) {
-              if (!this.user.token) {
+              if (!this.user || !this.user.token) {
                 this.presentLoginModal(interview);
               } else {
                 this.presentLoading(interview);
@@ -121,6 +126,11 @@ export class HomePage {
 
     interview.idAgent = this.user.userId;
 
+    // To upper case
+    interview.agentName = interview.agentName.toUpperCase();
+    interview.familyLeader = interview.familyLeader.toUpperCase();
+    interview.familyAddress = interview.familyAddress.toUpperCase();
+
     this.http.post<any>(`${this.API_BASE_URL}/dados_pessoais/store`,
       JSON.stringify(interview), httpOptions).subscribe(data => {
         // do nothing
@@ -130,6 +140,9 @@ export class HomePage {
           this.repo.saveInterviews(this.interviews).then(() => {
             loading.dismiss();
             this.presentToast("Entrevista enviada com sucesso!");
+          }).catch((error) => {
+            loading.dismiss();
+            this.presentToast("Ops, algo deu errado! Tente novamente mais tarde.");
           });
         } else if (error.status == 401) {
           this.presentLoginModal(interview);
@@ -138,6 +151,26 @@ export class HomePage {
           this.presentToast("Ops, algo deu errado! Tente novamente mais tarde.");
         }
       });
+  }
+
+  async presentAlertConfirmLogout() {
+    const alert = await this.alertController.create({
+      header: 'Atenção!',
+      message: 'Você deseja fazer <strong>logout</strong> no sistema?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel'
+        }, {
+          text: 'Sim',
+          handler: () => {
+            this.logout();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async presentAlertConfirm(interview: Interview) {

@@ -29,6 +29,10 @@ export class RepositoryService {
     });
   }
 
+  async deleteUser() {
+    return this.storage.remove(storage_constants.USER_STORAGE_KEY);
+  }
+
   async saveUser(user: User): Promise<any> {
     return this.storage.set(storage_constants.USER_STORAGE_KEY, user);
   }
