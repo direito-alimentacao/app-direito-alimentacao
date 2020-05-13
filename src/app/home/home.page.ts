@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, ModalController, AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { Interview } from '../model/interview';
 import { ModalInterviewComponent } from '../modal-interview/modal-interview.component';
@@ -13,9 +13,9 @@ import { User } from '../model/user';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  interviews: Interview[];
+  interviews: Interview[] = [];
   user: User;
 
   private API_BASE_URL: string = 'https://direitoalimentacao.herokuapp.com/api';
@@ -32,6 +32,16 @@ export class HomePage {
   async ionViewDidEnter() {
     this.updateInterviewsList();
     this.updateUserData();
+  }
+
+  async ngOnInit() {
+    await this.updateInterviewsList();
+    for (let interview of this.interviews) {
+      if (!interview.wasSent) {
+        this.presentAlertUnsentInterviews();
+        break;
+      }
+    }
   }
 
   private async updateInterviewsList() {
@@ -218,6 +228,20 @@ export class HomePage {
 
     await alert.present();
   }
+
+  async presentAlertUnsentInterviews() {
+    const alert = await this.alertController.create({
+      header: 'Atenção!',
+      message: 'Há entrevistas <strong>não enviadas</strong> ao CRAS.',
+      buttons: [{
+        text: 'Ok'
+      }
+      ]
+    });
+
+    await alert.present();
+  }
+
 
   async presentToast(msg: string) {
     const toast = await this.toastController.create({
