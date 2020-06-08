@@ -218,6 +218,7 @@ export class HomePage implements OnInit {
           text: 'Sim',
           handler: () => {
             interview.wasSent = false;
+            interview.interviewDate = new Date();
             this.repo.saveInterviews(this.interviews).then(() => {
               this.presentToast("Entrevista desbloqueada com sucesso!");
             });
